@@ -1,5 +1,5 @@
 <?php
-require_once($_SERVER['DOCUMENT_ROOT'].'/wantGet_Houses/api/House.class.php');
+require_once($_SERVER['DOCUMENT_ROOT'].'/wantGet_Houses/api/SetHouse.class.php');
 require_once($_SERVER['DOCUMENT_ROOT'].'/wantGet_Houses/index.php');
 
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
