@@ -12,7 +12,9 @@ class GetHouse {
     }
 
     public function get_Houses(){
-        $query = "select * from house_architecture";
+        $query = "select * from rent_houses
+        union
+        select * FROM sell_houses;";
         $result = $this->conn->query($query);
         if($result){
             $result = $result->fetch_all();
