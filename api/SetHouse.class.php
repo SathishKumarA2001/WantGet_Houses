@@ -3,7 +3,7 @@ require_once($_SERVER['DOCUMENT_ROOT'].'/wantGet_Houses/api/Database.class.php')
 require_once($_SERVER['DOCUMENT_ROOT'].'/wantGet_Houses/index.php');
 
 class House {
-    public function __construct($Facilities,$Area,$Price,$BuildedMaterial,$CeilingMaterial,$WaterFacility,$HouseAddress,$RentorSell,$Contact){
+    public function __construct($Facilities,$Area,$Price,$BuildedMaterial,$CeilingMaterial,$WaterFacility,$HouseAddress,$RentorSell,$Contact,$image_id){
         $this->Facilities = $Facilities;
         $this->Area = $Area;
         $this->Price = $Price;
@@ -13,6 +13,7 @@ class House {
         $this->HouseAddress = $HouseAddress;
         $this->RentorSell = $RentorSell;
         $this->Contact = $Contact;
+        $this->image_id = $image_id;
         $conn = new Database();
         $this->conn = $conn;
     }
@@ -21,9 +22,9 @@ class House {
     public function register_DB(){
         // If House is Sell it will save in sell_houses database
         if($this->RentorSell == "Sell"){
-            $query = "Insert into sell_houses(Facilities,Area,Price,BuildedMaterial,CeilingMaterial,WaterFacility,HouseAddress,RentorSell,Contact)
+            $query = "Insert into sell_houses(Facilities,Area,Price,BuildedMaterial,CeilingMaterial,WaterFacility,HouseAddress,RentorSell,Contact,image_id)
                  values('$this->Facilities','$this->Area','$this->Price','$this->BuildedMaterial','$this->CeilingMaterial','$this->WaterFacility',
-                 '$this->HouseAddress','$this->RentorSell','$this->Contact');";
+                 '$this->HouseAddress','$this->RentorSell','$this->Contact','$this->image_id');";
         $result = $this->conn->query($query);
         if($result){
             return "Sell House Registered Successfully";
@@ -33,9 +34,9 @@ class House {
         }
         //If House is Rent it will save in rent_houses database
         else if($this->RentorSell == "Rent"){
-            $query = "Insert into rent_houses(Facilities,Area,Price,BuildedMaterial,CeilingMaterial,WaterFacility,HouseAddress,RentorSell,Contact)
+            $query = "Insert into rent_houses(Facilities,Area,Price,BuildedMaterial,CeilingMaterial,WaterFacility,HouseAddress,RentorSell,Contact,image_id)
                       values('$this->Facilities','$this->Area','$this->Price','$this->BuildedMaterial','$this->CeilingMaterial','$this->WaterFacility',
-                     '$this->HouseAddress','$this->RentorSell','$this->Contact');";
+                     '$this->HouseAddress','$this->RentorSell','$this->Contact','$this->image_id');";
             $result = $this->conn->query($query);
             if($result){
                 return "Rent House Registered Successfully";
