@@ -21,6 +21,30 @@ class GetHouse {
         }
     }
 
+    public function get_rent_houses(){
+        //Query - This query select's all rows in both tables using full joins.
+        $query = "SELECT * FROM rent_houses;";
+        $result = $this->conn->query($query);
+        if($result){
+            $result = $result->fetch_all();
+            return $result;
+        }else{
+            return "Error".$this->conn->conn_error();
+        }
+    }
+
+    public function get_sell_houses(){
+        //Query - This query select's all rows in both tables using full joins.
+        $query = "SELECT * FROM sell_houses;";
+        $result = $this->conn->query($query);
+        if($result){
+            $result = $result->fetch_all();
+            return $result;
+        }else{
+            return "Error".$this->conn->conn_error();
+        }
+    }
+
     public function get_one_house($RentorSell,$house_id){
         //Query- This query's select's particular rows in one table and using Left join it get take one row in another table.
         if($RentorSell == "Rent"){
