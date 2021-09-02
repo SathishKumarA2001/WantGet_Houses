@@ -10,8 +10,8 @@ class GetHouse {
     }
 
     public function get_Houses(){
-        //Query - This query select's all rows in both tables.
-        $query = "select * from rent_houses union select * FROM sell_houses;";
+        //Query - This query select's all rows in both tables using full joins.
+        $query = "SELECT * FROM rent_houses UNION SELECT * FROM sell_houses;";
         $result = $this->conn->query($query);
         if($result){
             $result = $result->fetch_all();
@@ -22,9 +22,10 @@ class GetHouse {
     }
 
     public function get_one_house($RentorSell,$house_id){
-        //Query- This query's select's the particular rows in both tables using house_id,Rentorsell.
+        //Query- This query's select's particular rows in one table and using Left join it get take one row in another table.
         if($RentorSell == "Rent"){
-            $query = "select * from rent_houses where house_id=$house_id";
+            $query = "SELECT * FROM rent_houses LEFT JOIN images 
+                    ON rent_houses.image_id = images.image_id where rent_houses.house_id=$house_id;";
             $result = $this->conn->query($query);
             if($result){
                 $result = $result->fetch_all();
@@ -33,7 +34,8 @@ class GetHouse {
                 return "Error".$this->conn->conn_error();
             }
         }else{
-            $query = "select * from sell_houses where house_id=$house_id";
+            $query = "SELECT * FROM sell_houses LEFT JOIN images 
+            ON sell_houses.image_id = images.image_id where sell_houses.house_id=$house_id;";
             $result = $this->conn->query($query);
             if($result){
                 $result = $result->fetch_all();
