@@ -37,3 +37,28 @@ function upload(){
             return "Error in uploading Pictures : ".$conn->conn_error();
         }
 }
+
+/*
+function delete_empired_images(){
+    $conn = new Database();
+    //This query selects image_id doesn't exist in both tables by checking both tables 
+    $query = "SELECT images.image_id
+    FROM images 
+    INNER JOIN rent_houses
+    ON images.image_id != rent_houses.image_id
+    INNER JOIN sell_houses
+    ON images.image_id != sell_houses.image_id;";
+
+    $result = $conn->query($query);
+    $row = mysqli_fetch_all($result,MYSQLI_ASSOC);
+    for($i=0;$i<3;$i++){
+        print_r($row[$i]);
+    }
+    die();
+}
+
+delete_empired_images();
+
+*/
+
+
