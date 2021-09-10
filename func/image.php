@@ -3,11 +3,12 @@ require_once($_SERVER['DOCUMENT_ROOT'].'/wantGet_Houses/api/Database.class.php')
 
 function upload(){
     $file_dir = "../Images/";
-    $pic = array();    
-    for($x=1;$x<3;$x++){
-        $_FILES["House_pic"] = $_FILES["pic".$x];
-        
-        $file = $file_dir.basename($_FILES["House_pic"]["name"]);
+    $pic = array(); 
+
+    for($x=0;$x<2;$x++){
+        $_FILES["House_pic"] = $_FILES["pic"];
+        $file = $file_dir.basename($_FILES["House_pic"]["name"][$x]);
+
         //$file2 = $file_dir.basename($_FILES["pic2"]["name"]);
         $uploadOK = 1;
         $imageFileType = strtolower(pathinfo($file,PATHINFO_EXTENSION));
@@ -21,7 +22,7 @@ function upload(){
                 //echo "file is not an image ";
             }
         }
-        if(move_uploaded_file($_FILES["House_pic"]["tmp_name"], $file)) {
+        if(move_uploaded_file($_FILES["House_pic"]["tmp_name"][$x], $file)) {
             //echo "The file ". htmlspecialchars(basename( $_FILES["House_pic"]["name"])). " uploaded.";
             array_push($pic,$file);
         }else{

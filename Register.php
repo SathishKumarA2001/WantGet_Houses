@@ -1,5 +1,5 @@
 <?php
-  require_once($_SERVER['DOCUMENT_ROOT'].'/wantGet_Houses/func/register.php');
+  //require_once($_SERVER['DOCUMENT_ROOT'].'/wantGet_Houses/func/register.php');
 ?>
 
 <!doctype html>
@@ -75,7 +75,7 @@
   </svg>
   <h1 class="h3 mb-3 fw-normal">Please Register your House</h1>
 
-  <form action="register.php" method="POST" enctype="multipart/form-data">
+  <form action="./func/register.php" method="POST" enctype="multipart/form-data">
     <div class="form-floating">
       <input type="text" class="form-control" id="Facilities" name="Facilities" required autofocus>
       <label for="floatingInput">Facilities</label>
@@ -115,11 +115,7 @@
       <label for="floatingInput">Contact</label>
     </div>
     <div class="form-floating">
-      <input class="form-control" type="file" id="pic1" name="pic1" required autofocus>
-      <label for="floatingInput">Picture</label>
-    </div>
-    <div class="form-floating">
-      <input class="form-control" type="file" id="pic2" name="pic2" >
+      <input class="form-control" type="file" id="pic" name="pic[]" multiple required autofocus>
       <label for="floatingInput">Picture</label>
     </div><br>
     <input class="w-100 btn btn-lg btn-primary" type="submit" name="submit">

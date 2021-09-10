@@ -20,7 +20,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' and $_POST['submit']){
                 $data = json($data);
                 //response($data,403);
                 $data = 2;
-                header("Location: Register.php?error=$data");
+                header("Location: ./../Register.php?error=$data");
             }
         }
     }
@@ -36,7 +36,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' and $_POST['submit']){
         $data = json($data);
         //response($data,200);
         $data=1;
-        header("Location: Register.php?msg=".urldecode($data));
+        header("Location: ./../Register.php?msg=".urldecode($data));
         die();
     }
 }else{
