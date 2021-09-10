@@ -1,9 +1,10 @@
 <?php
 require_once($_SERVER['DOCUMENT_ROOT'].'/wantGet_Houses/api/SetHouse.class.php');
 require_once($_SERVER['DOCUMENT_ROOT'].'/wantGet_Houses/index.php');
+//require_once($_SERVER['DOCUMENT_ROOT'].'/wantGet_Houses/Register.php');
 require_once($_SERVER['DOCUMENT_ROOT'].'/wantGet_Houses/func/image.php');
 
-if($_SERVER['REQUEST_METHOD'] == 'POST'){
+if($_SERVER['REQUEST_METHOD'] == 'POST' and $_POST['submit']){
     $data = array('Facilities','Area','Price','BuildedMaterial','CeilingMaterial','WaterFacility',
                     'HouseAddress','RentorSell','Contact');
     $error = false;
@@ -17,8 +18,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                     "error" => "fill all rows"
                 ];
                 $data = json($data);
-                response($data,403);
-                die("die");
+                //response($data,403);
+                $data = 2;
+                header("Location: Register.php?error=$data");
             }
         }
     }
@@ -32,12 +34,17 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
             "result" => "$result",
         ];
         $data = json($data);
-        response($data,200);
+        //response($data,200);
+        $data=1;
+        header("Location: Register.php?msg=".urldecode($data));
+        die();
     }
 }else{
     $data = [
         "error" => "POST"
     ];
     $data = json($data);
-    response($data,403);
+    //response($data,403);
+    //$data=-1;
+    //header("Location: ./../Register.php?error=$data");
 }
