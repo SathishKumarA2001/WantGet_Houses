@@ -28,21 +28,6 @@ class GetHouse {
         $result = $this->conn->query($query);
         if($result){
             $result = $result->fetch_all();
-            $result = [
-                "House_id" => $result[0][0],
-                "image_id" => $result[0][1],
-                "Facilities" => $result[0][2],
-                "Area" => $result[0][3],
-                "Price" => $result[0][4],
-                "BuildedMaterial" => $result[0][5],
-                "CeilingMaterial" => $result[0][6],
-                "WaterFacility" => $result[0][7],
-                "HouseAddress" => $result[0][8],
-                "RentorSell" => $result[0][9],
-                "contact" => $result[0][10],
-                "pic1" => $result[0][14],
-                "pic2" => $result[0][15],
-            ];
             return $result;
         }else{
             return "Error".$this->conn->conn_error();
@@ -56,21 +41,6 @@ class GetHouse {
         $result = $this->conn->query($query);
         if($result){
             $result = $result->fetch_all();
-            $result = [
-                "House_id" => $result[0][0],
-                "image_id" => $result[0][1],
-                "Facilities" => $result[0][2],
-                "Area" => $result[0][3],
-                "Price" => $result[0][4],
-                "BuildedMaterial" => $result[0][5],
-                "CeilingMaterial" => $result[0][6],
-                "WaterFacility" => $result[0][7],
-                "HouseAddress" => $result[0][8],
-                "RentorSell" => $result[0][9],
-                "contact" => $result[0][10],
-                "pic1" => $result[0][14],
-                "pic2" => $result[0][15],
-            ];
             return $result;
         }else{
             return "Error".$this->conn->conn_error();

@@ -113,7 +113,7 @@
     <div class="form-floating">
       <input type="text" class="form-control" id="Contact" name="Contact" required autofocus>
       <label for="floatingInput">Contact</label>
-    </div>
+    </div> 
     <div class="form-floating">
       <input class="form-control" type="file" id="pic" name="pic[]" multiple required autofocus>
       <label for="floatingInput">Picture</label>

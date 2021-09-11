@@ -57,20 +57,21 @@
   <div class="album py-5 bg-light">
     <div class="container">
       <?php
-        $get_houses = get_houses($_SERVER['REQUEST_METHOD'] = 'POST',$_POST['RentorSell'] = 'Rent');
-        //print_r($get_houses);
+        $get_houses = get_houses($_SERVER['REQUEST_METHOD'] = 'POST',$_POST['RentorSell'] = 'Sell');
+        $s = sizeof($get_houses["pic1"])-1;
       ?>
 
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
         <div class="col">
           <div class="card shadow-sm">
-          <div class="bd-placeholder-img card-img-top" style="height: 255px; width: 100%; background: url(<?= $get_houses["pic2"]?>); background-position: center; background-size: contain;background-repeat: no-repeat;">
+          <?php $x = rand(0,$s)?>
+          <div class="bd-placeholder-img card-img-top" style="height: 255px; width: 100%; background: url(<?= $get_houses["pic2"]["$x"]?>); background-position: center; background-size: contain;background-repeat: no-repeat;">
               </div>
 
             <div class="card-body">
               <p class="card-text">  
-                <?php echo "Facilities : ".$get_houses["Facilities"]."</br>"; 
-                      echo "Price : ".$get_houses["Price"]; 
+                <?php echo "Facilities : ".$get_houses["Facilities"]["$x"]."</br>"; 
+                      echo "Price : ".$get_houses["Price"]["$x"]; 
                 ?>
               </p>
               <div class="d-flex justify-content-between align-items-center">
@@ -85,13 +86,14 @@
         </div>
         <div class="col">
           <div class="card shadow-sm">
-          <div class="bd-placeholder-img card-img-top" style="height: 255px; width: 100%; background: url(<?= $get_houses["pic2"]?>); background-position: center; background-size: contain;background-repeat: no-repeat;">
+            <?php $x = rand(0,$s)?>
+          <div class="bd-placeholder-img card-img-top" style="height: 255px; width: 100%; background: url(<?= $get_houses["pic1"]["$x"]?>); background-position: center; background-size: contain;background-repeat: no-repeat;">
               </div>
 
             <div class="card-body">
               <p class="card-text">  
-                <?php echo "Facilities : ".$get_houses["Facilities"]."</br>"; 
-                      echo "Price : ".$get_houses["Price"]; 
+                <?php echo "Facilities : ".$get_houses["Facilities"]["$x"]."</br>"; 
+                      echo "Price : ".$get_houses["Price"]["$x"]; 
                 ?>
               </p>
               <div class="d-flex justify-content-between align-items-center">

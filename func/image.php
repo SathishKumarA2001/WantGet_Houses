@@ -7,23 +7,15 @@ function upload(){
 
     for($x=0;$x<2;$x++){
         $_FILES["House_pic"] = $_FILES["pic"];
-        $file = $file_dir.basename($_FILES["House_pic"]["name"][$x]);
+        $path_parts = pathinfo($_FILES["House_pic"]["name"]["$x"]);
+        $extension = $path_parts['extension'];
+        $destination = "$file_dir".rand(1000,9999)."." . $extension;
+        $file = $file_dir.basename($destination);
 
-        //$file2 = $file_dir.basename($_FILES["pic2"]["name"]);
         $uploadOK = 1;
-        $imageFileType = strtolower(pathinfo($file,PATHINFO_EXTENSION));
         $conn = new Database();  //Database Connection
-
-        if(!isset($_POST["submit"])){
-            $check = getimagesize($_FILES["House_pic"]["tmp_name"]);
-            if($check !== false){
-                //echo "file is an image ".$check["mime"]." ";
-            }else{
-                //echo "file is not an image ";
-            }
-        }
-        if(move_uploaded_file($_FILES["House_pic"]["tmp_name"][$x], $file)) {
-            //echo "The file ". htmlspecialchars(basename( $_FILES["House_pic"]["name"])). " uploaded.";
+    
+        if(move_uploaded_file($_FILES["House_pic"]["tmp_name"]["$x"], $file)) {
             array_push($pic,$file);
         }else{
             echo "Sorry, there was an error uploading your file.";
@@ -38,6 +30,14 @@ function upload(){
             return "Error in uploading Pictures : ".$conn->conn_error();
         }
 }
+/*    if(!isset($_POST["submit"])){
+            $check = getimagesize($_FILES["House_pic"]["tmp_name"]);
+            if($check !== false){
+                //echo "file is an image ".$check["mime"]." ";
+            }else{
+                //echo "file is not an image ";
+            }
+        }*/
 
 /*
 function delete_empired_images(){

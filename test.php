@@ -8,7 +8,7 @@
 echo "POST: \n";
 print_r($_POST);
 echo "files: \n";
-print_r($_FILES["pic"]["name"]);
+print_r($_FILES["pic"]["name"]["0"]);
 //print_r ($_ENV);
 ?>
 </pre>
