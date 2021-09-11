@@ -11,7 +11,7 @@ class GetHouse {
 
     public function get_Houses(){
         //Query - This query select's all rows in both tables using full joins.
-        $query = "SELECT * FROM rent_houses UNION SELECT * FROM sell_houses;";
+        $query = "SELECT * FROM rent_houses UNION SELECT * FROM sell_houses ;";
         $result = $this->conn->query($query);
         if($result){
             $result = $result->fetch_all();
@@ -23,10 +23,26 @@ class GetHouse {
 
     public function get_rent_houses(){
         //Query - This query select's all rows in both tables using full joins.
-        $query = "SELECT * FROM rent_houses;";
+        $query = "SELECT * FROM rent_houses LEFT JOIN images
+        ON rent_houses.image_id = images.image_id;";
         $result = $this->conn->query($query);
         if($result){
             $result = $result->fetch_all();
+            $result = [
+                "House_id" => $result[0][0],
+                "image_id" => $result[0][1],
+                "Facilities" => $result[0][2],
+                "Area" => $result[0][3],
+                "Price" => $result[0][4],
+                "BuildedMaterial" => $result[0][5],
+                "CeilingMaterial" => $result[0][6],
+                "WaterFacility" => $result[0][7],
+                "HouseAddress" => $result[0][8],
+                "RentorSell" => $result[0][9],
+                "contact" => $result[0][10],
+                "pic1" => $result[0][14],
+                "pic2" => $result[0][15],
+            ];
             return $result;
         }else{
             return "Error".$this->conn->conn_error();
@@ -35,10 +51,26 @@ class GetHouse {
 
     public function get_sell_houses(){
         //Query - This query select's all rows in both tables using full joins.
-        $query = "SELECT * FROM sell_houses;";
+        $query = "SELECT * FROM sell_houses LEFT JOIN images 
+        ON sell_houses.image_id = images.image_id;";
         $result = $this->conn->query($query);
         if($result){
             $result = $result->fetch_all();
+            $result = [
+                "House_id" => $result[0][0],
+                "image_id" => $result[0][1],
+                "Facilities" => $result[0][2],
+                "Area" => $result[0][3],
+                "Price" => $result[0][4],
+                "BuildedMaterial" => $result[0][5],
+                "CeilingMaterial" => $result[0][6],
+                "WaterFacility" => $result[0][7],
+                "HouseAddress" => $result[0][8],
+                "RentorSell" => $result[0][9],
+                "contact" => $result[0][10],
+                "pic1" => $result[0][14],
+                "pic2" => $result[0][15],
+            ];
             return $result;
         }else{
             return "Error".$this->conn->conn_error();

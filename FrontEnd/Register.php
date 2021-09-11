@@ -1,5 +1,5 @@
 <?php
-  //require_once($_SERVER['DOCUMENT_ROOT'].'/wantGet_Houses/func/register.php');
+  require_once($_SERVER['DOCUMENT_ROOT'].'/wantGet_Houses/func/register.php');
 ?>
 
 <!doctype html>
@@ -13,7 +13,7 @@
     <title>Signin Template · Bootstrap v5.0</title>
 
     <!-- Bootstrap core CSS -->
-<link href="./FrontEnd/assets/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="./assets/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
       .bd-placeholder-img {
@@ -33,7 +33,7 @@
 
     
     <!-- Custom styles for this template -->
-    <link href="FrontEnd/sign-in/signin.css" rel="stylesheet">
+    <link href="./sign-in/signin.css" rel="stylesheet">
   </head>
   <body class="text-center">
     
@@ -75,7 +75,7 @@
   </svg>
   <h1 class="h3 mb-3 fw-normal">Please Register your House</h1>
 
-  <form action="./func/register.php" method="POST" enctype="multipart/form-data">
+  <form action="./../func/register.php" method="POST" enctype="multipart/form-data">
     <div class="form-floating">
       <input type="text" class="form-control" id="Facilities" name="Facilities" required autofocus>
       <label for="floatingInput">Facilities</label>
