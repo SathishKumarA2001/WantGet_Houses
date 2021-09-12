@@ -11,10 +11,18 @@ class GetHouse {
 
     public function get_Houses(){
         //Query - This query select's all rows in both tables using full joins.
-        $query = "SELECT * FROM rent_houses UNION SELECT * FROM sell_houses ;";
-        $result = $this->conn->query($query);
-        if($result){
-            $result = $result->fetch_all();
+        $query1 = "SELECT * FROM rent_houses LEFT JOIN images
+        ON rent_houses.image_id = images.image_id;";
+        $query2 = "SELECT * FROM sell_houses LEFT JOIN images 
+        ON sell_houses.image_id = images.image_id;";
+        $result = array();
+        $result1 = $this->conn->query($query1);
+        $result2 = $this->conn->query($query2);
+        if($result1 and $result2){
+            $result1 = $result1->fetch_all();
+            $result2 = $result2->fetch_all();
+            array_push($result,$result1);
+            array_push($result,$result2);
             return $result;
         }else{
             return "Error".$this->conn->conn_error();
