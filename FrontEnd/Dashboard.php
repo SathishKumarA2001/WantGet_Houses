@@ -24,6 +24,20 @@
           font-size: 3.5rem;
         }
       }
+
+      .fixed-bg {
+  min-height: 10%;
+  background-size: cover;
+  -o-background-size: cover; 
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-position: center center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+    
     </style>
 
     
@@ -37,14 +51,9 @@
   <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <div class="navbar-nav">
-    <div class="nav-item text-nowrap">
-      <a class="nav-link px-3" href="#">Sign out</a>
-    </div>
-  </div>
 </header>
 
-<div class="container-fluid">>
+<div class="container-fluid">
   <div class="row">
     <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
       <div class="position-sticky pt-3">
@@ -84,32 +93,25 @@
     </nav>
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
       <br>
+      <h5 class="fixed-bg">A sea of Houses | Take one you liked</h5>
     <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
-  <div class="carousel-indicators">
-    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
-    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
-  </div>
   <div class="carousel-inner">
     <div class="carousel-item active">
       <img src="./dashboard/nature.jpg" class="d-block w-100" width="1200" height="420px" alt="Apartments">
       <div class="carousel-caption d-none d-md-block">
-        <h5>First slide label</h5>
-        <p>Some representative placeholder content for the first slide.</p>
+        <h5 class="fixed-bg">Solo Forest Houses for peace </h5>
       </div>
     </div>
     <div class="carousel-item">
       <img src="./dashboard/apartment.jpg" class="d-block w-100" width="1200" height="420px" alt="Single House">
       <div class="carousel-caption d-none d-md-block">
-        <h5>Second slide label</h5>
-        <p>Some representative placeholder content for the second slide.</p>
+        <h5 class="fixed-bg">Apartments for peoples who loves traffic with peoples</h5>
       </div>
     </div>
     <div class="carousel-item">
       <img src="./dashboard/hut.jpg" class="d-block w-100" width="1200" height="420px" alt="Huts">
       <div class="carousel-caption d-none d-md-block">
-        <h5>Third slide label</h5>
-        <p>Some representative placeholder content for the third slide.</p>
+        <h5 class="fixed-bg">Huts for naturistic peoples</h5>
       </div>
     </div>
   </div>

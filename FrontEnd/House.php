@@ -1,5 +1,9 @@
 <?php
   require_once($_SERVER['DOCUMENT_ROOT'].'/wantGet_Houses/func/home.php');
+  if(empty($_GET)){
+    echo 'Wrong Entry: Please do your testing by another way';
+    die();
+  }
 ?>
 
 <!doctype html>
@@ -79,15 +83,15 @@
             <div class="card-body">
               <p class="card-text">  
                 <?php echo "Facilities : ".$get_houses["Facilities"]["$x"]."</br>"; 
-                      echo "Price : ".$get_houses["Price"]["$x"]; 
+                      echo "Price : ".$get_houses["Price"]["$x"]."</br>"; 
+                      echo "House : ".$get_houses["RentorSell"]["$x"];
                 ?>
               </p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
                   <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
                 </div>
-                <small class="text-muted">9 mins</small>
+                <small class="text-muted">house</small>
               </div>
             </div>
           </div>
@@ -101,15 +105,15 @@
             <div class="card-body">
               <p class="card-text">  
                 <?php echo "Facilities : ".$get_houses["Facilities"]["$x"]."</br>"; 
-                      echo "Price : ".$get_houses["Price"]["$x"]; 
+                      echo "Price : ".$get_houses["Price"]["$x"]."</br>"; 
+                      echo "House : ".$get_houses["RentorSell"]["$x"];
                 ?>
               </p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
                   <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
                 </div>
-                <small class="text-muted">9 mins</small>
+                <small class="text-muted">live</small>
               </div>
             </div>
           </div>
