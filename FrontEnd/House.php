@@ -89,7 +89,7 @@
               </p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                  <a href="./picture.php?House_id=<?php echo $get_houses["House_id"]["$x"]?>&RentorSell=<?php echo $get_houses["RentorSell"]["$x"]?>" type="button" class="btn btn-sm btn-outline-secondary">View</a>
                 </div>
                 <small class="text-muted">house</small>
               </div>
@@ -111,9 +111,9 @@
               </p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                <a href="./picture.php?House_id=<?php echo $get_houses["House_id"]["$x"]?>&RentorSell=<?php echo $get_houses["RentorSell"]["$x"]?>" type="button" class="btn btn-sm btn-outline-secondary">View</a>
                 </div>
-                <small class="text-muted">live</small>
+                <small class="text-muted">house</small>
               </div>
             </div>
           </div>

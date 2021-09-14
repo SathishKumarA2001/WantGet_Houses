@@ -55,7 +55,7 @@ class GetHouse {
         }
     }
 
-    public function get_one_house($RentorSell,$house_id){
+    public function get_one_house($house_id,$RentorSell){
         //Query- This query's select's particular rows in one table and using Left join it get take one row in another table.
         if($RentorSell == "Rent"){
             $query = "SELECT * FROM rent_houses LEFT JOIN images 

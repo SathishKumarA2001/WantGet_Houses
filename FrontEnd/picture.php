@@ -1,6 +1,6 @@
 <?php
   require_once($_SERVER['DOCUMENT_ROOT'].'/wantGet_Houses/func/get_one_house.php');
-  if(!empty($_GET)){
+  if(empty($_GET)){
     echo 'Wrong Entry: Please do your testing by another way';
     die();
   }
@@ -45,7 +45,7 @@
     }
     .detail{
       letter-spacing: 2px;
-      line-height: 2;
+      line-height: .5;
       font-variant: small-caps;
       border: 2px solid grey;
       border-radius: 5px;
@@ -57,7 +57,14 @@
   </head>
 
 <?php
-
+    if(!empty($_GET['House_id']) and !empty($_GET['RentorSell'])){
+      $House_id = $_GET['House_id'];
+      $RentorSell = $_GET['RentorSell'];
+      $get_one_house = get_one_house($House_id,$RentorSell);
+      if($get_one_house == 0){
+        echo "Wrong Entry Try to get in a straight way";
+      }
+    }
 ?>
 
 
@@ -67,10 +74,10 @@
     <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
       <div class="carousel-inner">
         <div class="carousel-item active">
-          <img src="./dashboard/hut.jpg" class="d-block w-100" alt="pic1">
+          <img src="<?= $get_one_house["Pic1"][0]?>" class="d-block w-100" alt="pic1">
         </div>
         <div class="carousel-item">
-          <img src="./dashboard/apartment.jpg" class="d-block w-100" alt="pic2">
+          <img src="<?= $get_one_house["Pic2"][0]?>" class="d-block w-100" alt="pic2">
         </div>
       </div>
     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
@@ -91,12 +98,15 @@
     <a class="navbar-brand" href="./House.php?type=Rent">Back to Houses</a>
   </div>
 </nav><br>
-  <div class="p-2 detail">Flex item : 1-203-456-4657	John Doe</div>
-  <div class="p-2 detail">Flex item 2: 1-203-456-4657	John Doe</div>
-  <div class="p-2 detail">Flex item 3: 1-203-456-4657	John Doe</div>
-  <div class="p-2 detail">Flex item 1: 1-203-456-4657	John Doe</div>
-  <div class="p-2 detail">Flex item 2: 1-203-456-4657	John Doe</div>
-  <div class="p-2 detail">Flex item 3: 1-203-456-4657	John Doe</div>
+  <div class="p-2 detail"><p><b>Facilities</b> : <?=$get_one_house["Facilities"][0]?></p></div>
+  <div class="p-2 detail"><p><b>Area</b> : <?=$get_one_house["Area"][0]?></p></div>
+  <div class="p-2 detail"><p><b>Price</b> : <?=$get_one_house["Price"][0]?></p></div>
+  <div class="p-2 detail"><p><b>Builded Material</b> : <?=$get_one_house["BuildedMaterial"][0]?></p></div>
+  <div class="p-2 detail"><p><b>Ceiling Material</b> : <?=$get_one_house["CeilingMaterial"][0]?></p></div>
+  <div class="p-2 detail"><p><b>Water Facility</b> : <?=$get_one_house["WaterFacility"][0]?></p></div>
+  <div class="p-2 detail"><p><b>House Address</b> : <?=$get_one_house["HouseAddress"][0]?></p></div>
+  <div class="p-2 detail"><p><b>Rent or Sell</b> : <?=$get_one_house["RentorSell"][0]?></p></div>
+  <div class="p-2 detail"><p><b>Contact</b> : <?=$get_one_house["Contact"][0]?></p></div>
 </div>
 
 <script src="./assets/dist/js/bootstrap.bundle.min.js"></script>
