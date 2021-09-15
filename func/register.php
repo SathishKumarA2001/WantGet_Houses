@@ -38,8 +38,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' /*and $_POST['submit']*/){
         $data = json($data);
         //response($data,200);
         $data=1;
+        return $result;
         header("Location: ./../FrontEnd/Register.php?msg=".urldecode($data));
-        die();
     }
 }else{
     $data = [

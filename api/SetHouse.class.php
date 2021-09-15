@@ -22,24 +22,30 @@ class House {
     public function register_DB(){
         // If House is Sell it will save in sell_houses database
         if($this->RentorSell == "Sell"){
-            $query = "Insert into sell_houses(Facilities,Area,Price,BuildedMaterial,CeilingMaterial,WaterFacility,HouseAddress,RentorSell,Contact,image_id)
-                 values('$this->Facilities','$this->Area','$this->Price','$this->BuildedMaterial','$this->CeilingMaterial','$this->WaterFacility',
+            $House_id = uniqid();
+            $query = "Insert into sell_houses(House_id,Facilities,Area,Price,BuildedMaterial,CeilingMaterial,WaterFacility,HouseAddress,RentorSell,Contact,image_id)
+                 values('$House_id','$this->Facilities','$this->Area','$this->Price','$this->BuildedMaterial','$this->CeilingMaterial','$this->WaterFacility',
                  '$this->HouseAddress','$this->RentorSell','$this->Contact','$this->image_id');";
         $result = $this->conn->query($query);
         if($result){
-            return "Sell House Registered Successfully";
+            $query = "SELECT House_id FROM sell_houses;";
+            $House_id = $this->conn->query($query);
+            return $House_id;
         }else{
             return "Error".$this->conn->conn_error();
         }
         }
         //If House is Rent it will save in rent_houses database
         else if($this->RentorSell == "Rent"){
-            $query = "Insert into rent_houses(Facilities,Area,Price,BuildedMaterial,CeilingMaterial,WaterFacility,HouseAddress,RentorSell,Contact,image_id)
-                      values('$this->Facilities','$this->Area','$this->Price','$this->BuildedMaterial','$this->CeilingMaterial','$this->WaterFacility',
+            $House_id = uniqid();
+            $query = "Insert into rent_houses(House_id,Facilities,Area,Price,BuildedMaterial,CeilingMaterial,WaterFacility,HouseAddress,RentorSell,Contact,image_id)
+                      values('$House_id','$this->Facilities','$this->Area','$this->Price','$this->BuildedMaterial','$this->CeilingMaterial','$this->WaterFacility',
                      '$this->HouseAddress','$this->RentorSell','$this->Contact','$this->image_id');";
             $result = $this->conn->query($query);
             if($result){
-                return "Rent House Registered Successfully";
+                $query = "SELECT House_id FROM sell_houses;";
+                $House_id = $this->conn->query($query);
+                return $House_id;
             }else{
                 return "Error".$this->conn->conn_error();
             }
