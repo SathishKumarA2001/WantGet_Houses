@@ -33,12 +33,12 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' /*and $_POST['submit']*/){
                             $value[5],$value[6],$value[7],$value[8],$image_id);
         $result = $house->register_db(); //Register the data of house after filtering by passing register_db() function in house class
         $data = [
-            "result" => "$result",
+            "result" => "",
         ];
         $data = json($data);
         //response($data,200);
         $data=1;
-        return $result;
+        //return $result;
         header("Location: ./../FrontEnd/Register.php?msg=".urldecode($data));
     }
 }else{

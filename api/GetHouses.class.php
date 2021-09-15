@@ -59,7 +59,7 @@ class GetHouse {
         //Query- This query's select's particular rows in one table and using Left join it get take one row in another table.
         if($RentorSell == "Rent"){
             $query = "SELECT * FROM rent_houses LEFT JOIN images 
-                    ON rent_houses.image_id = images.image_id where rent_houses.house_id=$house_id;";
+                    ON rent_houses.image_id = images.image_id where rent_houses.House_id='$house_id';";
             $result = $this->conn->query($query);
             if($result){
                 $result = $result->fetch_all();
@@ -69,7 +69,7 @@ class GetHouse {
             }
         }else{
             $query = "SELECT * FROM sell_houses LEFT JOIN images 
-            ON sell_houses.image_id = images.image_id where sell_houses.house_id=$house_id;";
+            ON sell_houses.image_id = images.image_id where sell_houses.House_id='$house_id';";
             $result = $this->conn->query($query);
             if($result){
                 $result = $result->fetch_all();
