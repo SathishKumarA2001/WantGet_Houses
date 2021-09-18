@@ -28,9 +28,10 @@ class House {
                  '$this->HouseAddress','$this->RentorSell','$this->Contact','$this->image_id');";
         $result = $this->conn->query($query);
         if($result){
-            $query = "SELECT House_id FROM sell_houses;";
+            $query = "SELECT House_id,RentorSell FROM sell_houses where House_id='$House_id';";
             $House_id = $this->conn->query($query);
-            return $House_id;
+            $row = mysqli_fetch_assoc($House_id);
+            return $row;
         }else{
             return "Error".$this->conn->conn_error();
         }
@@ -43,9 +44,10 @@ class House {
                      '$this->HouseAddress','$this->RentorSell','$this->Contact','$this->image_id');";
             $result = $this->conn->query($query);
             if($result){
-                $query = "SELECT House_id FROM sell_houses;";
+                $query = "SELECT House_id,RentorSell FROM rent_houses where House_id='$House_id';";
                 $House_id = $this->conn->query($query);
-                return $House_id;
+                $row = mysqli_fetch_assoc($House_id);
+                return $row;
             }else{
                 return "Error".$this->conn->conn_error();
             }

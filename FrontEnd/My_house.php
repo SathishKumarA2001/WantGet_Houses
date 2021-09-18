@@ -1,16 +1,20 @@
 <?php
+  require_once($_SERVER['DOCUMENT_ROOT'].'/wantGet_Houses/func/my_house.php');
   require_once($_SERVER['DOCUMENT_ROOT'].'/wantGet_Houses/func/get_one_house.php');
   require_once('../Signin/auth.php');
 
-  if(isset($_COOKIE['username']) and isset($_COOKIE['token'])){
+  if(isset($_COOKIE['username']) and isset($_COOKIE['token']) and isset($_POST['password'])){
     if(!verify_session($_COOKIE['username'],$_COOKIE['token'])){
       header("Location: ../Signin/Signin.php");
+    }else{
+      $house = user_house_id($_COOKIE['username'],$_POST['password']);
+      $get_one_house = get_one_house($house['House_id'],$house['RentorSell']);
+      if($get_one_house == 0){
+        echo "Wrong Entry Try to get in a straight way";
+      }
     }
   }
-  if(empty($_GET)){
-    echo 'Wrong Entry: Please do your testing by another way';
-    die();
-  }
+
 ?>
 
 <!doctype html>
@@ -62,18 +66,6 @@
     </style>
     <link href="./picture/picture.css" rel="stylesheet">
   </head>
-
-<?php
-    if(!empty($_GET['House_id']) and !empty($_GET['RentorSell'])){
-      $House_id = $_GET['House_id'];
-      $RentorSell = $_GET['RentorSell'];
-      $get_one_house = get_one_house($House_id,$RentorSell);
-      if($get_one_house == 0){
-        echo "Wrong Entry Try to get in a straight way";
-      }
-    }
-?>
-
 
 <body class="d-flex h-100 text-center text-white bg-dark ">
 <!-- Picture Box -->

@@ -1,7 +1,7 @@
 <?php
 require_once($_SERVER['DOCUMENT_ROOT'].'/wantGet_Houses/api/SetHouse.class.php');
 require_once($_SERVER['DOCUMENT_ROOT'].'/wantGet_Houses/index.php');
-//require_once($_SERVER['DOCUMENT_ROOT'].'/wantGet_Houses/Register.php');
+require_once($_SERVER['DOCUMENT_ROOT'].'/wantGet_Houses/Signin/auth.php');
 require_once($_SERVER['DOCUMENT_ROOT'].'/wantGet_Houses/func/image.php');
 
 if($_SERVER['REQUEST_METHOD'] == 'POST' /*and $_POST['submit']*/){
@@ -31,15 +31,13 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' /*and $_POST['submit']*/){
         $image_id = upload(); // Upload the Pictures in Storage and get the path
         $house = new House($value[0],$value[1],$value[2],$value[3],$value[4],
                             $value[5],$value[6],$value[7],$value[8],$image_id);
-        $result = $house->register_db(); //Register the data of house after filtering by passing register_db() function in house class
-        $data = [
-            "result" => "",
-        ];
-        $data = json($data);
-        //response($data,200);
-        $data=1;
-        //return $result;
-        header("Location: ./../FrontEnd/Register.php?msg=".urldecode($data));
+        $result = $house->register_DB(); //Register the data of house after filtering by passing register_db() function in house class
+        if($result != 0){
+            $result = update_House_id_Signup($result['House_id'],$result['RentorSell']);
+            if($result){
+                header("Location: ./../FrontEnd/Register.php?msg=".urldecode(1));
+            }
+        }
     }
 }else{
     $data = [

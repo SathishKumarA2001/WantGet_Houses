@@ -1,6 +1,7 @@
 <?php
 require_once($_SERVER['DOCUMENT_ROOT'].'/wantGet_Houses/api/Database.class.php');
 
+if(isset($_COOKIE['username']) and isset($_COOKIE['token'])){
     if(!empty($_POST["email"]) and !empty($_POST["password"])){
         if($_POST["submit"]){
             $conn = new Database(); //Database Connection
@@ -24,11 +25,11 @@ require_once($_SERVER['DOCUMENT_ROOT'].'/wantGet_Houses/api/Database.class.php')
                 if($result){
                     // Set cookie and add seesion
                     $token = md5(time());
-                    $query = "INSERT into session(username,token) values('$username','$token');";
+                    $query = "INSERT into session(username,password,token) values('$username','$password','$token');";
                     $result = $conn->query($query);
                     if($result){
-                        setcookie('username',$username,time()+(7*24*60*60));
-                        setcookie('token',$token,time()+(7*24*60*60));
+                        setcookie('username',$username,time()+(7*24*60*60),"/");
+                        setcookie('token',$token,time()+(7*24*60*60),"/");
                         header("Location: ../FrontEnd/Dashboard.php?msg=success");
                     }else{
                         return $result;
@@ -46,7 +47,6 @@ function verify_session($username, $token){
     $conn = new Database(); //Database Connection
     $query = "SELECT * from session where username = '$username' and token = '$token';";
     $result = $conn->query($query);
-
     if ($result) {
         $row = mysqli_fetch_assoc($result);
         $time = strtotime($row['created']);
@@ -56,9 +56,32 @@ function verify_session($username, $token){
             return false;
         }
     }else{
-        return false;
+        return $conn->conn_error();
     }
 }
 
+function update_House_id_Signup($House_id,$RentorSell){
+    if(isset($_COOKIE['username']) and isset($_COOKIE['token'])){
+        $token = $_COOKIE['token'];
+        $conn = new Database(); //Database Connection
+        $query = "SELECT * from session where token='$token';";
+        $result = $conn->query($query);
+        $row = mysqli_fetch_assoc($result);
+        $username = $row['username'];
+        $password = $row['password'];
+        //Insert House_id in signup query
+        if($result){
+            $query = "INSERT INTO house_id (House_id,RentorSell,username,password)
+            VALUES ('$House_id','$RentorSell','$username','$password');";
+            $result = $conn->query($query);
+            return $result;
+        }else{
+            return 0;
+        }
+    }else{
+        return 0;
+    }
+}
 
+}
 ?>

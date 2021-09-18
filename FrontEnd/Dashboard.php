@@ -1,3 +1,12 @@
+<?php
+require_once('./../Signin/auth.php');
+  if(isset($_COOKIE['username']) and isset($_COOKIE['token'])){
+    if(!verify_session($_COOKIE['username'],$_COOKIE['token'])){
+      header("Location: ../Signin/Signin.php");
+    }
+  }
+?>
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -82,15 +91,16 @@
               Customers
             </a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@fat" >
             <a class="nav-link" href="#">
               <span data-feather="shopping-cart"></span>
-              My Houses
+              My_houses
             </a>
           </li>
         </ul>
       </div>
     </nav>
+
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
       <br>
       <h5 class="fixed-bg">A sea of Houses | Take one you liked</h5>
@@ -128,6 +138,42 @@
   </div>
 </div>
 
+<!--POP OVER PASSWORD PAGE --> 
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="./My_house.php" method=POST>
+          <div class="mb-3">
+            <label for="message-text" class="col-form-label">PASSWORD:</label>
+            <input class="form-control" type="password" name="password"><br>
+            <button type="submit" name="submit" class="btn btn-primary">Send message</button>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  var exampleModal = document.getElementById('exampleModal')
+exampleModal.addEventListener('show.bs.modal', function (event) {
+  var button = event.relatedTarget
+  var recipient = button.getAttribute('data-bs-whatever')
+  var modalTitle = exampleModal.querySelector('.modal-title')
+  var modalBodyInput = exampleModal.querySelector('.modal-body input')
+
+  modalTitle.textContent = 'New message to ' + recipient
+  modalBodyInput.value = recipient
+})
+</script>
 
     <script src="./assets/dist/js/bootstrap.bundle.min.js"></script>
 

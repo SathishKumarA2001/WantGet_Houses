@@ -1,9 +1,7 @@
 <?php
   require_once('./auth.php');
   if(verify_session($_COOKIE['username'],$_COOKIE['token'])){
-    header("Location: ../FrontEnd/Dashboard.php");
-  }else{
-    header("Location: signin.php");
+    header("Location: ./../FrontEnd/Dashboard.php");
   }
 ?>
 

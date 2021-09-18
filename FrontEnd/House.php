@@ -1,5 +1,13 @@
 <?php
   require_once($_SERVER['DOCUMENT_ROOT'].'/wantGet_Houses/func/home.php');
+  require_once('../Signin/auth.php');
+
+  if(isset($_COOKIE['username']) and isset($_COOKIE['token'])){
+    if(!verify_session($_COOKIE['username'],$_COOKIE['token'])){
+      header("Location: ../Signin/Signin.php");
+    }
+  }
+
   if(empty($_GET)){
     echo 'Wrong Entry: Please do your testing by another way';
     die();
