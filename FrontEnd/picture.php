@@ -25,42 +25,9 @@
     <!-- Bootstrap core CSS  <div class="p-1 carousel slide"><img src="./dashboard/hut.jpg" width=900px height=600px> </div>-->
 <link href="./assets/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <style>
-      .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        user-select: none;
-      }
 
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
-        }
-      }
-      
-    img,.carousel-inner {
-    display: block;
-    max-width:880px;
-    max-height:880px;
-    width: auto;
-    height: auto;
-    }
-    #details{
-      padding: 20px;
-    }
-    .detail{
-      letter-spacing: 2px;
-      line-height: .5;
-      font-variant: small-caps;
-      border: 2px solid grey;
-      border-radius: 5px;
-    }
-
-
-    </style>
     <link href="./picture/picture.css" rel="stylesheet">
+    <link href="./picture/image_model.css" rel="stylesheet">
   </head>
 
 <?php
@@ -74,17 +41,20 @@
     }
 ?>
 
-
 <body class="d-flex h-100 text-center text-white bg-dark ">
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-6">
 <!-- Picture Box -->
   <div class="d-flex p-2">
     <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
       <div class="carousel-inner">
         <div class="carousel-item active">
-          <img src="<?= $get_one_house["Pic1"][0]?>" class="d-block w-100" alt="pic1">
+          <img src="<?= $get_one_house["Pic1"][0]?>" class="d-block w-100" alt="pic1" id="myImg">
         </div>
         <div class="carousel-item">
-          <img src="<?= $get_one_house["Pic2"][0]?>" class="d-block w-100" alt="pic2">
+          <img src="<?= $get_one_house["Pic2"][0]?>" class="d-block w-100" alt="pic2" id="myImg1">
         </div>
       </div>
     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
@@ -97,6 +67,8 @@
     </button>
   </div>
 </div>
+</div>
+    <div class="col-sm-4">
 
 <!-- Details Box-->
 <div class="d-flex flex-column pt-3">
@@ -116,9 +88,47 @@
   <div class="p-2 detail"><p><b>Contact</b> : <?=$get_one_house["Contact"][0]?></p></div>
 </div>
 
+</div>
+</div>
+</div>
 <script src="./assets/dist/js/bootstrap.bundle.min.js"></script>
-
 <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script><script src="./dashboard/dashboard.js"></script>
+
+
+<!-- Image Modal -->
+<div id="myModal" class="modal">
+  <span class="close">&times;</span>
+  <img class="modal-content" id="img01">
+  <div id="caption"></div>
+</div>
+
+<script>
+// Get the modal
+var modal = document.getElementById("myModal");
+
+// Get the image and insert it inside the modal - use its "alt" text as a caption
+var img = document.getElementById("myImg");
+var img1 = document.getElementById("myImg1");
+var modalImg = document.getElementById("img01");
+var captionText = document.getElementById("caption");
+img.onclick = function(){
+  modal.style.display = "block";
+  modalImg.src = this.src;
+  captionText.innerHTML = this.alt;
+}
+img1.onclick = function(){
+  modal.style.display = "block";
+  modalImg.src = this.src;
+  captionText.innerHTML = this.alt;
+}
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() { 
+  modal.style.display = "none";
+}
+</script>
 
 </body>
 </html>

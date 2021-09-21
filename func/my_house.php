@@ -5,7 +5,8 @@ require_once($_SERVER['DOCUMENT_ROOT'].'/wantGet_Houses/api/Database.class.php')
         $conn = new Database(); //Database Connection
         $query = "SELECT House_id,RentorSell from house_id where username='$username' and password='$password'";
         $result = $conn->query($query);
-        $row = mysqli_fetch_assoc($result);
-        return $row;
+        //$row = mysqli_fetch_assoc($result);
+        $result = $result->fetch_all();
+        return $result;
     }
 ?>

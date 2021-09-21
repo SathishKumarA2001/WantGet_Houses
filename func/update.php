@@ -3,7 +3,7 @@ require_once($_SERVER['DOCUMENT_ROOT'].'/wantGet_Houses/api/AlterHouse.class.php
 require_once($_SERVER['DOCUMENT_ROOT'].'/wantGet_Houses/func/image.php');
 require_once($_SERVER['DOCUMENT_ROOT'].'/wantGet_Houses/index.php');
 
-if($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['House_id']){
+if($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['House_id'] && $_POST['submit']){
     $data = array('Facilities','Area','Price','BuildedMaterial','CeilingMaterial','WaterFacility',
     'HouseAddress','RentorSell','Contact','House_id');
     foreach($data as $data){
@@ -17,6 +17,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['House_id']){
     $data = [
         "result" => $result,
     ];
-    $data = json($data);
-    response($data,200);
+    //$data = json($data);
+    //response($data,200);
+    header("Location:./../FrontEnd/Dashboard.php?msg=$result");
 }

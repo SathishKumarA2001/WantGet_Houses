@@ -4,7 +4,9 @@ require_once($_SERVER['DOCUMENT_ROOT'].'/wantGet_Houses/api/Database.class.php')
 function upload(){
     $file_dir = "../Images/";
     $pic = array(); 
-
+    if(empty($_FILES["pic"]["name"]["0"])){
+        return 0;
+    }
     for($x=0;$x<2;$x++){
         $_FILES["House_pic"] = $_FILES["pic"];
         $path_parts = pathinfo($_FILES["House_pic"]["name"]["$x"]);

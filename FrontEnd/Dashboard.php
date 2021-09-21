@@ -103,6 +103,22 @@ require_once('./../Signin/auth.php');
 
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
       <br>
+    <?php
+    if (isset($_GET['msg'])) {
+    ?>
+    <div class="alert alert-success" role="alert">
+    	<?php
+      if($_GET['msg'] == 1){
+    	  $msg = "Updated successfully";
+      }else{
+        $msg = "Couldn't update";
+      }
+        echo $msg;
+      }
+    	?>
+    </div>
+
+      <br>
       <h5 class="fixed-bg">A sea of Houses | Take one you liked</h5>
     <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
   <div class="carousel-inner">
@@ -126,12 +142,8 @@ require_once('./../Signin/auth.php');
     </div>
   </div>
   <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
   </button>
   <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
   </button>
 </div>
     </main>
@@ -142,16 +154,12 @@ require_once('./../Signin/auth.php');
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">New message</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
       <div class="modal-body">
         <form action="./My_house.php" method=POST>
           <div class="mb-3">
             <label for="message-text" class="col-form-label">PASSWORD:</label>
             <input class="form-control" type="password" name="password"><br>
-            <button type="submit" name="submit" class="btn btn-primary">Send message</button>
+            <button type="submit" name="submit" class="btn btn-primary">Verify</button>
           </div>
         </form>
       </div>
