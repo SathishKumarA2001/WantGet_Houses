@@ -1,21 +1,53 @@
 <?php
+session_start();
   require_once($_SERVER['DOCUMENT_ROOT'].'/wantGet_Houses/func/my_house.php');
   require_once($_SERVER['DOCUMENT_ROOT'].'/wantGet_Houses/func/get_one_house.php');
   require_once('../Signin/auth.php');
-  
-  if(isset($_COOKIE['username']) and isset($_COOKIE['token']) and isset($_POST['password'])){
-    if(!verify_session($_COOKIE['username'],$_COOKIE['token'])){
-      header("Location: ../Signin/Signin.php");
-    }else{
-      $house = user_house_id($_COOKIE['username'],$_POST['password']);
-      //print_r($house[1][0]);
-      $get_one_house = get_one_house($house[0][0],$house[0][1]);
-      //die();
-      if($get_one_house == 0){
-        echo "Wrong Entry Try to get in a straight way";
+
+    if(isset($_COOKIE['username']) and isset($_COOKIE['token']) and isset($_POST['password'])){
+      if(!verify_session($_COOKIE['username'],$_COOKIE['token'])){
+        header("Location: ../Signin/Signin.php");
+      }else{
+        $house = user_house_id($_COOKIE['username'],$_POST['password']);
+        if(!$house){
+          header("Location: ./Dashboard.php?err=1");
+        }
+        $_SESSION['password'] = $_POST['password'];
+        $get_one_house = get_one_house($house[0][0],$house[0][1]);
+        if($get_one_house == 0){
+          echo "Wrong Entry Try to get in a straight way";
+        }
       }
+    }elseif(isset($_COOKIE['username']) and isset($_COOKIE['token']) and isset($_SESSION['password'])){
+      if(!verify_session($_COOKIE['username'],$_COOKIE['token'])){
+        header("Location: ../Signin/Signin.php");
+      }else{
+        $house = user_house_id($_COOKIE['username'],$_SESSION['password']);
+        if(!$house){
+          header("Location: ./Dashboard.php?err=1");
+        }
+        // Previous and Next Algorithmic code
+        $size = sizeof($house);
+        $_SESSION['count'];
+        if(isset($_GET['next'])){
+          $_SESSION['count'] = $_SESSION['count']+1;
+          if($_SESSION['count'] == $size){
+            $_SESSION['count'] = $size-3;
+          }
+        }elseif(isset($_GET['previous'])){
+          $_SESSION['count'] = $_SESSION['count']-1;
+          if($_SESSION['count'] <= 0){
+            $_SESSION['count'] = $size-3;
+          }
+        }
+        $get_one_house = get_one_house($house[$_SESSION['count']][0],$house[$_SESSION['count']][1]);
+        if($get_one_house == 0){
+        echo "Wrong Entry Try to get in a straight way";
+        }
+      }
+    }else{
+      header("Location: ./Dashboard.php");
     }
-  }
 ?>
 
 <!doctype html>
@@ -40,20 +72,16 @@
   });
 });
     </script>
-
   </head>
-  <?php
-   echo "<script>document.writeln(count);</script>";
-?>
 
 <body class="d-flex h-100 text-center text-white bg-dark ">
 <div class="container">
 <ul class="nav">
   <li class="nav-item">
-    <input type="button" value="count" class="nav-link active" id="previous"/>
+    <a href="./My_house.php?previous=1" class="nav-link active">Previous</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link active">Next House</a>
+    <a href="./My_house.php?next=1"  class="nav-link active">Next House</a>
   </li>
 </ul>
 
@@ -214,6 +242,5 @@ span.onclick = function() {
   modal.style.display = "none";
 }
 </script>
-
 </body>
 </html>
