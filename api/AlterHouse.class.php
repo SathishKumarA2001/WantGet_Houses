@@ -13,18 +13,27 @@ class AlterHouse extends House{
         $this->image_id = $image_id;
     }
 
-    public function delete_house(){
+    public static function delete_house($RentorSell,$House_id){
+        $conn = new Database();
         $result = 1;
-        if($this->RentorSell == 'Rent'){
-            $query = "DELETE rent_houses, images FROM rent_houses  
+        if($RentorSell == 'Rent'){
+            $query = "DELETE rent_houses,images FROM rent_houses  
             INNER JOIN images ON rent_houses.image_id=images.image_id   
-            WHERE rent_houses.House_id = '$this->house_id';";
-            $result = $this->conn->query($query);
-        }else if($this->RentorSell == 'Sell'){
+            WHERE rent_houses.House_id = '$House_id';";
+            $result = $conn->query($query);
+            if($result){
+                $query = "DELETE FROM house_id WHERE House_id='$House_id' AND RentorSell='$RentorSell';";
+                $result = $conn->query($query);
+            }
+        }else if($RentorSell == 'Sell'){
             $query = "DELETE sell_houses, images FROM sell_houses  
             INNER JOIN images ON sell_houses.image_id=images.image_id   
-            WHERE sell_houses.House_id = '$this->house_id';";
-            $result = $this->conn->query($query);
+            WHERE sell_houses.House_id = '$House_id';";
+            $result = $conn->query($query);
+            if($result){
+                $query = "DELETE FROM house_id WHERE House_id='$House_id' AND RentorSell='$RentorSell';";
+                $result = $conn->query($query);
+            }
         }
         if($result){
             return $result;

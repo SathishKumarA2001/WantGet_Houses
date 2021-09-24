@@ -1,7 +1,6 @@
 <?php
 require_once($_SERVER['DOCUMENT_ROOT'].'/wantGet_Houses/api/Database.class.php');
 
-if(isset($_COOKIE['username']) and isset($_COOKIE['token'])){
     if(!empty($_POST["email"]) and !empty($_POST["password"])){
         if($_POST["submit"]){
             $conn = new Database(); //Database Connection
@@ -81,7 +80,5 @@ function update_House_id_Signup($House_id,$RentorSell){
     }else{
         return 0;
     }
-}
-
 }
 ?>

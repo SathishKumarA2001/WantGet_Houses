@@ -1,7 +1,9 @@
 <?php
   require_once('./auth.php');
-  if(verify_session($_COOKIE['username'],$_COOKIE['token'])){
-    header("Location: ./../FrontEnd/Dashboard.php");
+  if(isset($_COOKIE['username']) and isset($_COOKIE['token'])){
+    if(verify_session($_COOKIE['username'],$_COOKIE['token'])){
+      header("Location: ./../FrontEnd/Dashboard.php");
+    }
   }
 ?>
 

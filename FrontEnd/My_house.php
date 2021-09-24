@@ -2,11 +2,12 @@
 session_start();
   require_once($_SERVER['DOCUMENT_ROOT'].'/wantGet_Houses/func/my_house.php');
   require_once($_SERVER['DOCUMENT_ROOT'].'/wantGet_Houses/func/get_one_house.php');
-  require_once('../Signin/auth.php');
+  //require_once($_SERVER['DOCUMENT_ROOT'].'/wantGet_Houses/func/Delete.php');
+  require_once($_SERVER['DOCUMENT_ROOT'].'/wantGet_Houses/Signin/auth.php');
 
     if(isset($_COOKIE['username']) and isset($_COOKIE['token']) and isset($_POST['password'])){
       if(!verify_session($_COOKIE['username'],$_COOKIE['token'])){
-        header("Location: ../Signin/Signin.php");
+        header("Location: ./../Signin/Signin.php");
       }else{
         $house = user_house_id($_COOKIE['username'],$_POST['password']);
         if(!$house){
@@ -20,7 +21,7 @@ session_start();
       }
     }elseif(isset($_COOKIE['username']) and isset($_COOKIE['token']) and isset($_SESSION['password'])){
       if(!verify_session($_COOKIE['username'],$_COOKIE['token'])){
-        header("Location: ../Signin/Signin.php");
+        header("Location: ./../Signin/Signin.php");
       }else{
         $house = user_house_id($_COOKIE['username'],$_SESSION['password']);
         if(!$house){
@@ -32,12 +33,12 @@ session_start();
         if(isset($_GET['next'])){
           $_SESSION['count'] = $_SESSION['count']+1;
           if($_SESSION['count'] == $size){
-            $_SESSION['count'] = $size-3;
+            $_SESSION['count'] = 0;
           }
         }elseif(isset($_GET['previous'])){
           $_SESSION['count'] = $_SESSION['count']-1;
           if($_SESSION['count'] <= 0){
-            $_SESSION['count'] = $size-3;
+            $_SESSION['count'] = 0;
           }
         }
         $get_one_house = get_one_house($house[$_SESSION['count']][0],$house[$_SESSION['count']][1]);
@@ -46,7 +47,7 @@ session_start();
         }
       }
     }else{
-      header("Location: ./Dashboard.php");
+      header("Location: ./../Signin/Signin.php");
     }
 ?>
 
@@ -76,6 +77,7 @@ session_start();
 
 <body class="d-flex h-100 text-center text-white bg-dark ">
 <div class="container">
+
 <ul class="nav">
   <li class="nav-item">
     <a href="./My_house.php?previous=1" class="nav-link active">Previous</a>
@@ -109,6 +111,7 @@ session_start();
   </div>
 </div>
 </div>
+
 <div class="col-sm-4">
 <!-- Details Box-->
 <div class="d-flex flex-column pt-3">
@@ -127,8 +130,13 @@ session_start();
   <nav class="nav nav-pills">
   <button class="nav-link active detail p-2" id="myBtn" type="button" data-backdrop="false"  data-bs-toggle="modal" data-bs-target="#exampleModal">
   Edit
-  </button>
-  <a class="nav-link detail detail p-2" href="#">Delete</a>
+  </button>     
+
+  <form action="./../func/Delete.php" method="POST"> 
+  <input type="hidden" name="House_id" value="<?=$house[$_SESSION['count']][0]?>" >
+  <input type="hidden" name="RentorSell" value="<?=$house[$_SESSION['count']][1]?>" >
+  <input type="submit" class="nav-link detail detail p-2" value="Delete">
+  </form>
 </nav>
 </div>
 </div>
@@ -218,7 +226,6 @@ session_start();
 <script>
 // Get the modal
 var modal = document.getElementById("myModal");
-
 // Get the image and insert it inside the modal - use its "alt" text as a caption
 var img = document.getElementById("myImg");
 var img1 = document.getElementById("myImg1");
@@ -236,7 +243,6 @@ img1.onclick = function(){
 }
 // Get the <span> element that closes the modal
 var span = document.getElementsByClassName("close")[0];
-
 // When the user clicks on <span> (x), close the modal
 span.onclick = function() { 
   modal.style.display = "none";

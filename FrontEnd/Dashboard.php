@@ -1,5 +1,5 @@
 <?php
-require_once('./../Signin/auth.php');
+require_once($_SERVER['DOCUMENT_ROOT'].'/wantGet_Houses/Signin/auth.php');
   if(isset($_COOKIE['username']) and isset($_COOKIE['token'])){
     if(!verify_session($_COOKIE['username'],$_COOKIE['token'])){
       header("Location: ../Signin/Signin.php");
@@ -15,7 +15,7 @@ require_once('./../Signin/auth.php');
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.84.0">    
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- Bootstrap core CSS -->
 <link href="./assets/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -103,20 +103,50 @@ require_once('./../Signin/auth.php');
 
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
       <br>
+
+        
+<?php
+  //Alert Box for Delete method
+  if(isset($_GET['delmsg'])) {
+    if($_GET['delmsg'] == 'success'){
+?>
+  <div class="alert alert-success" role="alert">
+  Deleted Successfully
+</div>
+<?php
+  }
+  }
+  if(isset($_GET['delmsg'])){
+    if($_GET['delmsg'] == 'failure'){
+?>
+<div class="alert alert-warning" role="alert">
+  Can't Delete...
+</div>
+<?php
+    }
+  }
+?>
+
     <?php
     if (isset($_GET['msg'])) {
+      if($_GET['msg'] == '1'){
     ?>
     <div class="alert alert-success" role="alert">
-    	<?php
-      if($_GET['msg'] == 1){
-    	  $msg = "Updated successfully";
-      }else{
-        $msg = "Couldn't update";
-      }
-        echo $msg;
-      }
-    	?>
+      Updated Successfully
     </div>
+    <?php
+      }
+    }
+    if (isset($_GET['msg'])) {
+      if($_GET['msg'] == '0'){
+    ?>
+    <div class="alert alert-warning" role="alert">
+  Can't Update...
+</div>
+<?php
+    }
+  }
+?>
 
       <br>
       <h5 class="fixed-bg">A sea of Houses | Take one you liked</h5>
@@ -181,6 +211,13 @@ exampleModal.addEventListener('show.bs.modal', function (event) {
   modalTitle.textContent = 'New message to ' + recipient
   modalBodyInput.value = recipient
 })
+
+//Alert Hiding in 5 seconds
+window.setTimeout(function() {
+    $(".alert").fadeTo(500, 0).slideUp(500, function(){
+        $(this).remove(); 
+    });
+}, 5000);
 </script>
 
     <script src="./assets/dist/js/bootstrap.bundle.min.js"></script>

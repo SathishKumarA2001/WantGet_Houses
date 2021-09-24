@@ -14,10 +14,5 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['House_id'] && $_POST['submit'
     $_POST['Price'],$_POST['BuildedMaterial'],$_POST['CeilingMaterial'],
     $_POST['WaterFacility'],$_POST['HouseAddress'],$_POST['RentorSell'],$_POST['Contact'],$_POST['House_id'],$image_id);
     $result = $house->update_house();
-    $data = [
-        "result" => $result,
-    ];
-    //$data = json($data);
-    //response($data,200);
     header("Location:./../FrontEnd/Dashboard.php?msg=$result");
 }

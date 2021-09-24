@@ -32,7 +32,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' /*and $_POST['submit']*/){
         $house = new House($value[0],$value[1],$value[2],$value[3],$value[4],
                             $value[5],$value[6],$value[7],$value[8],$image_id);
         $result = $house->register_DB(); //Register the data of house after filtering by passing register_db() function in house class
-        if($result != 0){
+        if($result){
             $result = update_House_id_Signup($result['House_id'],$result['RentorSell']);
             if($result){
                 header("Location: ./../FrontEnd/Register.php?msg=".urldecode(1));
