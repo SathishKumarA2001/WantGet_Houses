@@ -35,7 +35,6 @@ class GetHouse {
         ON rent_houses.image_id = images.image_id;";
         $result = $this->conn->query($query);
         if($result){
-            $result = $result->fetch_all();
             return $result;
         }else{
             return "Error".$this->conn->conn_error();
@@ -48,7 +47,6 @@ class GetHouse {
         ON sell_houses.image_id = images.image_id;";
         $result = $this->conn->query($query);
         if($result){
-            $result = $result->fetch_all();
             return $result;
         }else{
             return "Error".$this->conn->conn_error();
@@ -77,6 +75,39 @@ class GetHouse {
             }else{
                 return "Error".$this->conn->conn_error();
             }
+        }
+    }
+
+    public function get_rent_Filter($Filter='none',$min=0,$max=0,$type='none'){
+        if($type=='Facilities'){
+            $query = "SELECT * FROM rent_houses LEFT JOIN images
+            ON rent_houses.image_id = images.image_id where rent_houses.Facilities like '$Filter%';";
+            $result = $this->conn->query($query);
+        }elseif($type=='Area'){
+            $query = "SELECT * FROM rent_houses LEFT JOIN images
+            ON rent_houses.image_id = images.image_id where rent_houses.Area BETWEEN '$min' AND '$max';";
+            $result = $this->conn->query($query);       
+        }elseif($type=='Price'){
+            $query = "SELECT * FROM rent_houses LEFT JOIN images
+            ON rent_houses.image_id = images.image_id where rent_houses.Price BETWEEN '$min' AND '$max';";
+            $result = $this->conn->query($query); 
+        }elseif($type=='HouseAddress'){
+            $query = "SELECT * FROM rent_houses LEFT JOIN images
+            ON rent_houses.image_id = images.image_id where rent_houses.HouseAddress = '$Filter';";
+            $result = $this->conn->query($query); 
+        }elseif($type=='WaterFacility'){
+            $query = "SELECT * FROM rent_houses LEFT JOIN images
+            ON rent_houses.image_id = images.image_id where rent_houses.WaterFacility BETWEEN '$min' AND '$max';";
+            $result = $this->conn->query($query); 
+        }else{}
+        if($result){
+            $array = array();
+            while($row = mysqli_fetch_assoc($result)){
+                $array[] = $row;
+            }
+            return $array;
+        }else{
+            return "Error".$this->conn->conn_error();
         }
     }
 }

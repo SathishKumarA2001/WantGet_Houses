@@ -1,5 +1,6 @@
 <?php
   require_once($_SERVER['DOCUMENT_ROOT'].'/wantGet_Houses/func/home.php');
+  require_once($_SERVER['DOCUMENT_ROOT'].'/wantGet_Houses/func/filter.php');
   require_once('../Signin/auth.php');
 
   if(isset($_COOKIE['username']) and isset($_COOKIE['token'])){
@@ -78,26 +79,26 @@
           $get_houses = get_houses($_GET['type']);
         }
       }
-      $s = sizeof($get_houses["pic1"])-1;
+      $s = sizeof($get_houses)-1;
       ?>
 
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
         <div class="col">
           <div class="card shadow-sm">
           <?php $x = rand(0,$s)?>
-          <div class="bd-placeholder-img card-img-top" style="height: 255px; width: 100%; background: url(<?= $get_houses["pic2"]["$x"]?>); background-position: center; background-size: contain;background-repeat: no-repeat;">
+          <div class="bd-placeholder-img card-img-top" style="height: 255px; width: 100%; background: url(<?= $get_houses["$x"]["pic2"]?>); background-position: center; background-size: contain;background-repeat: no-repeat;">
               </div>
 
             <div class="card-body">
               <p class="card-text">  
-                <?php echo "Facilities : ".$get_houses["Facilities"]["$x"]."</br>"; 
-                      echo "Price : ".$get_houses["Price"]["$x"]."</br>"; 
-                      echo "House : ".$get_houses["RentorSell"]["$x"];
+                <?php echo "Facilities : ".$get_houses["$x"]["Facilities"]."</br>"; 
+                      echo "Price : ".$get_houses["$x"]["Price"]."</br>"; 
+                      echo "House : ".$get_houses["$x"]["RentorSell"];
                 ?>
               </p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
-                  <a href="./picture.php?House_id=<?php echo $get_houses["House_id"]["$x"]?>&RentorSell=<?php echo $get_houses["RentorSell"]["$x"]?>" type="button" class="btn btn-sm btn-outline-secondary">View</a>
+                  <a href="./picture.php?House_id=<?php echo $get_houses["$x"]["House_id"]?>&RentorSell=<?php echo $get_houses["$x"]["RentorSell"]?>" type="button" class="btn btn-sm btn-outline-secondary">View</a>
                 </div>
                 <small class="text-muted">house</small>
               </div>
@@ -107,19 +108,19 @@
         <div class="col">
           <div class="card shadow-sm">
             <?php $x = rand(0,$s)?>
-          <div class="bd-placeholder-img card-img-top" style="height: 255px; width: 100%; background: url(<?= $get_houses["pic1"]["$x"]?>); background-position: center; background-size: contain;background-repeat: no-repeat;">
+          <div class="bd-placeholder-img card-img-top" style="height: 255px; width: 100%; background: url(<?= $get_houses["$x"]["pic1"]?>); background-position: center; background-size: contain;background-repeat: no-repeat;">
               </div>
 
             <div class="card-body">
               <p class="card-text">  
-                <?php echo "Facilities : ".$get_houses["Facilities"]["$x"]."</br>"; 
-                      echo "Price : ".$get_houses["Price"]["$x"]."</br>"; 
-                      echo "House : ".$get_houses["RentorSell"]["$x"];
+                <?php echo "Facilities : ".$get_houses["$x"]["Facilities"]."</br>"; 
+                      echo "Price : ".$get_houses["$x"]["Price"]."</br>"; 
+                      echo "House : ".$get_houses["$x"]["RentorSell"];
                 ?>
               </p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
-                <a href="./picture.php?House_id=<?php echo $get_houses["House_id"]["$x"]?>&RentorSell=<?php echo $get_houses["RentorSell"]["$x"]?>" type="button" class="btn btn-sm btn-outline-secondary">View</a>
+                <a href="./picture.php?House_id=<?php echo $get_houses["$x"]["House_id"]?>&RentorSell=<?php echo $get_houses["$x"]["RentorSell"]?>" type="button" class="btn btn-sm btn-outline-secondary">View</a>
                 </div>
                 <small class="text-muted">house</small>
               </div>
