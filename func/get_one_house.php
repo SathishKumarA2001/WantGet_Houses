@@ -12,30 +12,9 @@ function get_one_house($House_id,$RentorSell){
         }
         $house = new GetHouse();
         $result = $house->get_one_house($value[0],$value[1]);
-        $result = [
-            "House_id" => array_column($result, '0'),
-            "image_id" => array_column($result, '1'),
-            "Facilities" => array_column($result, '2'),
-            "Area" => array_column($result, '3'),
-            "Price" => array_column($result, '4'),
-            "BuildedMaterial" => array_column($result, '5'),
-            "CeilingMaterial" => array_column($result, '6'),
-            "WaterFacility" => array_column($result, '7'),
-            "HouseAddress" => array_column($result, '8'),
-            "RentorSell" => array_column($result, '9'),
-            "Contact" => array_column($result, '10'),
-            "Pic1" => array_column($result, '14'),
-            "Pic2" => array_column($result, '15'), 
-        ]; 
-        if($result == 0){
-            return 0;
-        }else{
+        $result = mysqli_fetch_assoc($result);
+        if($result){
             return $result;
         }
-        $data = [
-            "result" => $result,
-        ];
-        $data = json($data);
-        //response($data,200);
     }
 }

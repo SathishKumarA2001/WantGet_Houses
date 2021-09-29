@@ -51,10 +51,10 @@
     <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
       <div class="carousel-inner">
         <div class="carousel-item active">
-          <img src="<?= $get_one_house["Pic1"][0]?>" class="d-block w-100" alt="pic1" id="myImg">
+          <img src="<?= $get_one_house["pic1"]?>" class="d-block w-100" alt="pic1" id="myImg">
         </div>
         <div class="carousel-item">
-          <img src="<?= $get_one_house["Pic2"][0]?>" class="d-block w-100" alt="pic2" id="myImg1">
+          <img src="<?= $get_one_house["pic2"]?>" class="d-block w-100 " alt="pic2" id="myImg1">
         </div>
       </div>
     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
@@ -77,15 +77,15 @@
     <a class="navbar-brand" href="./House.php?type=Rent">Back to Houses</a>
   </div>
 </nav><br>
-  <div class="p-2 detail"><p><b>Facilities</b> : <?=$get_one_house["Facilities"][0]?></p></div>
-  <div class="p-2 detail"><p><b>Area</b> : <?=$get_one_house["Area"][0]?></p></div>
-  <div class="p-2 detail"><p><b>Price</b> : <?=$get_one_house["Price"][0]?></p></div>
-  <div class="p-2 detail"><p><b>Builded Material</b> : <?=$get_one_house["BuildedMaterial"][0]?></p></div>
-  <div class="p-2 detail"><p><b>Ceiling Material</b> : <?=$get_one_house["CeilingMaterial"][0]?></p></div>
-  <div class="p-2 detail"><p><b>Water Facility</b> : <?=$get_one_house["WaterFacility"][0]?></p></div>
-  <div class="p-2 detail"><p><b>House Address</b> : <?=$get_one_house["HouseAddress"][0]?></p></div>
-  <div class="p-2 detail"><p><b>Rent or Sell</b> : <?=$get_one_house["RentorSell"][0]?></p></div>
-  <div class="p-2 detail"><p><b>Contact</b> : <?=$get_one_house["Contact"][0]?></p></div>
+  <div class="p-2 detail"><p><b>Facilities</b> : <?=$get_one_house["Facilities"]?></p></div>
+  <div class="p-2 detail"><p><b>Area</b> : <?=$get_one_house["Area"]?></p></div>
+  <div class="p-2 detail"><p><b>Price</b> : <?=$get_one_house["Price"]?></p></div>
+  <div class="p-2 detail"><p><b>District</b> : <?=$get_one_house["District"]?></p></div>
+  <div class="p-2 detail"><p><b>City</b> : <?=$get_one_house["City"]?></p></div>
+  <div class="p-2 detail"><p><b>Water Facility</b> : <?=$get_one_house["WaterFacility"]?></p></div>
+  <div class="p-2 detail"><p><b>House Address</b> : <?=$get_one_house["HouseAddress"]?></p></div>
+  <div class="p-2 detail"><p><b>Rent or Sell</b> : <?=$get_one_house["RentorSell"]?></p></div>
+  <div class="p-2 detail"><p><b>Contact</b> : <?=$get_one_house["Contact"]?></p></div>
 </div>
 
 </div>

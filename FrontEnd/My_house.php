@@ -94,10 +94,10 @@ session_start();
     <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
       <div class="carousel-inner">
         <div class="carousel-item active">
-          <img src="<?= $get_one_house["Pic1"][0]?>" class="d-block w-100" alt="pic1" id="myImg">
+          <img src="<?= $get_one_house["pic1"]?>" class="d-block w-100" alt="pic1" id="myImg">
         </div>
         <div class="carousel-item">
-          <img src="<?= $get_one_house["Pic2"][0]?>" class="d-block w-100" alt="pic2" id="myImg1">
+          <img src="<?= $get_one_house["pic2"]?>" class="d-block w-100" alt="pic2" id="myImg1">
         </div>
       </div>
     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
@@ -116,15 +116,15 @@ session_start();
 <!-- Details Box-->
 <div class="d-flex flex-column pt-3">
 <a class="p-2" href="./House.php?type=Rent">Back to Houses</a>
-  <div class="detail"><p><b>Facilities</b> : <?=$get_one_house["Facilities"][0]?></p></div>
-  <div class="detail"><p><b>Area</b> : <?=$get_one_house["Area"][0]?></p></div>
-  <div class="detail"><p><b>Price</b> : <?=$get_one_house["Price"][0]?></p></div>
-  <div class="detail"><p><b>Builded Material</b> : <?=$get_one_house["BuildedMaterial"][0]?></p></div>
-  <div class="detail"><p><b>Ceiling Material</b> : <?=$get_one_house["CeilingMaterial"][0]?></p></div>
-  <div class="detail"><p><b>Water Facility</b> : <?=$get_one_house["WaterFacility"][0]?></p></div>
-  <div class="detail"><p><b>House Address</b> : <?=$get_one_house["HouseAddress"][0]?></p></div>
-  <div class="detail"><p><b>Rent or Sell</b> : <?=$get_one_house["RentorSell"][0]?></p></div>
-  <div class=" detail"><p><b>Contact</b> : <?=$get_one_house["Contact"][0]?></p></div>
+  <div class="detail"><p><b>Facilities</b> : <?=$get_one_house["Facilities"]?></p></div>
+  <div class="detail"><p><b>Area</b> : <?=$get_one_house["Area"]?></p></div>
+  <div class="detail"><p><b>Price</b> : <?=$get_one_house["Price"]?></p></div>
+  <div class="detail"><p><b>District</b> : <?=$get_one_house["District"]?></p></div>
+  <div class="detail"><p><b>City</b> : <?=$get_one_house["City"]?></p></div>
+  <div class="detail"><p><b>Water Facility</b> : <?=$get_one_house["WaterFacility"]?></p></div>
+  <div class="detail"><p><b>House Address</b> : <?=$get_one_house["HouseAddress"]?></p></div>
+  <div class="detail"><p><b>Rent or Sell</b> : <?=$get_one_house["RentorSell"]?></p></div>
+  <div class=" detail"><p><b>Contact</b> : <?=$get_one_house["Contact"]?></p></div>
   <br>
   <div>
   <nav class="nav nav-pills">
@@ -152,57 +152,54 @@ session_start();
       <div class="modal-body">
       
       <form action="./../func/update.php" method="POST" enctype="multipart/form-data">
-      <input type="hidden" name="House_id" id="House_id" value="<?=$get_one_house["House_id"][0]?>" />
+      <input type="hidden" name="House_id" value="<?=$get_one_house["House_id"]?>" />
       
   <div class="row mb-4" style="user-select: auto;">
         <div class="col" style="user-select: auto;">
-          <input type="text" class="form-control" id="Facilities" name="Facilities" value="<?=$get_one_house["Facilities"][0]?>" required autofocus>
+          <input type="text" class="form-control"  name="Facilities" value="<?=$get_one_house["Facilities"]?>" required autofocus>
           <label>Facilities</label>
         </div>
         <div class="col" style="user-select: auto;">
-          <input type="text" class="form-control" id="Area" name="Area" value="<?=$get_one_house["Area"][0]?>" required autofocus>
+          <input type="text" class="form-control" name="Area" value="<?=$get_one_house["Area"]?>" required autofocus>
           <label>Area</label>
         </div>
   </div>
   <div class="row mb-4" style="user-select: auto;">
         <div class="col" style="user-select: auto;">
-          <input type="text" class="form-control" id="Price" name="Price" value="<?=$get_one_house["Price"][0]?>" required autofocus>
+          <input type="text" class="form-control" name="Price" value="<?=$get_one_house["Price"]?>" required autofocus>
           <label>Price</label>
         </div>
         <div class="col" style="user-select: auto;">
-        <input type="text" class="form-control" id="BuildedMaterial" name="BuildedMaterial" value="<?=$get_one_house["BuildedMaterial"][0]?>" required autofocus>
-        <label>BuildedMaterial</label>
+        <input type="text" class="form-control" name="District" value="<?=$get_one_house["District"]?>" required autofocus>
+        <label>District</label>
         </div>
   </div>
   <div class="row mb-4" style="user-select: auto;">
         <div class="col" style="user-select: auto;">
-        <input type="text" class="form-control" id="CielingMaterial" name="CeilingMaterial" value="<?=$get_one_house["CeilingMaterial"][0]?>" required autofocus>
-      <label>CielingMaterial</label>
+        <input type="text" class="form-control" name="City" value="<?=$get_one_house["City"]?>" required autofocus>
+      <label>City</label>
         </div>
         <div class="col" style="user-select: auto;">
-        <input type="text" class="form-control" id="WaterFacility" name="WaterFacility" value="<?=$get_one_house["WaterFacility"][0]?>" required autofocus>
+        <input type="text" class="form-control" name="WaterFacility" value="<?=$get_one_house["WaterFacility"]?>" required autofocus>
       <label>WaterFacility</label>
         </div>
   </div>
   <div class="row mb-4" style="user-select: auto;">
         <div class="col" style="user-select: auto;">
-        <input type="text" class="form-control" id="HouseAddress" name="HouseAddress" value="<?=$get_one_house["HouseAddress"][0]?>" required autofocus>
+        <input type="text" class="form-control" name="HouseAddress" value="<?=$get_one_house["HouseAddress"]?>" required autofocus>
       <label>HouseAddress</label>
         </div>
         <div class="col" style="user-select: auto;">
-        <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="RentorSell" value="<?=$get_one_house["RentorSell"][0]?>" required autofocus>
-      <option selected value="Rent">Rent</option>
-      <option value="Sell">Sell</option>
-      </select>
+        <input type="text" class="form-control" name="Contact" value="<?=$get_one_house["Contact"]?>" required autofocus>
+      <label>Contact</label><br>
         </div>
   </div>
   <div class="row mb-4" style="user-select: auto;">
-        <div class="col" style="user-select: auto;">
-        <input type="text" class="form-control" id="Contact" name="Contact" value="<?=$get_one_house["Contact"][0]?>" required autofocus>
-      <label>Contact</label><br>
+        <div>
+        <input type="hidden" name="RentorSell" value="<?=$get_one_house["RentorSell"]?>">
         </div>
         <div class="col" style="user-select: auto;">
-        <input class="form-control" type="file" id="pic" name="pic[]" multiple autofocus>
+        <input class="form-control" type="file" name="pic[]" multiple autofocus>
       <label>Picture</label>
         </div>
   </div>

@@ -5,8 +5,8 @@ require_once($_SERVER['DOCUMENT_ROOT'].'/wantGet_Houses/index.php');
 
 // Get all houses data's 
 class AlterHouse extends House{
-    public function __construct($Facilities,$Area,$Price,$BuildedMaterial,$CeilingMaterial,$WaterFacility,$HouseAddress,$RentorSell,$Contact,$House_id,$image_id){
-        parent::__construct($Facilities,$Area,$Price,$BuildedMaterial,$CeilingMaterial,$WaterFacility,$HouseAddress,$RentorSell,$Contact,$image_id);
+    public function __construct($Facilities,$Area,$Price,$District,$City,$WaterFacility,$HouseAddress,$RentorSell,$Contact,$House_id,$image_id){
+        parent::__construct($Facilities,$Area,$Price,$District,$City,$WaterFacility,$HouseAddress,$RentorSell,$Contact,$image_id);
         $conn = new Database();
         $this->conn = $conn;
         $this->house_id = $House_id;
@@ -52,13 +52,13 @@ class AlterHouse extends House{
         }
         if($this->RentorSell == 'Rent'){
             $query = "UPDATE rent_houses SET image_id='$this->image_id',Facilities='$this->Facilities',Area='$this->Area',Price='$this->Price',
-            BuildedMaterial='$this->BuildedMaterial',CeilingMaterial='$this->CeilingMaterial',WaterFacility='$this->WaterFacility',
+            District='$this->District',City='$this->City',WaterFacility='$this->WaterFacility',
             HouseAddress='$this->HouseAddress',Contact='$this->Contact'
             WHERE House_id = '$this->house_id';";
             $result = $this->conn->query($query);
         }else if($this->RentorSell == 'Sell'){
             $query = "UPDATE sell_houses SET image_id='$this->image_id',Facilities='$this->Facilities',Area='$this->Area',Price='$this->Price',
-            BuildedMaterial='$this->BuildedMaterial',CeilingMaterial='$this->CeilingMaterial',WaterFacility='$this->WaterFacility',
+            District='$this->District',City='$this->City',WaterFacility='$this->WaterFacility',
             HouseAddress='$this->HouseAddress',Contact='$this->Contact'
             WHERE House_id = '$this->house_id';";
             $result = $this->conn->query($query);

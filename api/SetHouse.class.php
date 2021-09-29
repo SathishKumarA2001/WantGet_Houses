@@ -3,12 +3,12 @@ require_once($_SERVER['DOCUMENT_ROOT'].'/wantGet_Houses/api/Database.class.php')
 require_once($_SERVER['DOCUMENT_ROOT'].'/wantGet_Houses/index.php');
 
 class House {
-    public function __construct($Facilities,$Area,$Price,$BuildedMaterial,$CeilingMaterial,$WaterFacility,$HouseAddress,$RentorSell,$Contact,$image_id){
+    public function __construct($Facilities,$Area,$Price,$District,$City,$WaterFacility,$HouseAddress,$RentorSell,$Contact,$image_id){
         $this->Facilities = $Facilities;
-        $this->Area = $Area;
+        $this->Area = $Area.="sqft";
         $this->Price = $Price;
-        $this->BuildedMaterial = $BuildedMaterial;
-        $this->CeilingMaterial = $CeilingMaterial;
+        $this->District = $District;
+        $this->City = $City;
         $this->WaterFacility = $WaterFacility;
         $this->HouseAddress = $HouseAddress;
         $this->RentorSell = $RentorSell;
@@ -23,8 +23,8 @@ class House {
         // If House is Sell it will save in sell_houses database
         if($this->RentorSell == "Sell"){
             $House_id = uniqid();
-            $query = "Insert into sell_houses(House_id,Facilities,Area,Price,BuildedMaterial,CeilingMaterial,WaterFacility,HouseAddress,RentorSell,Contact,image_id)
-                 values('$House_id','$this->Facilities','$this->Area','$this->Price','$this->BuildedMaterial','$this->CeilingMaterial','$this->WaterFacility',
+            $query = "Insert into sell_houses(House_id,Facilities,Area,Price,District,City,WaterFacility,HouseAddress,RentorSell,Contact,image_id)
+                 values('$House_id','$this->Facilities','$this->Area','$this->Price','$this->District','$this->City','$this->WaterFacility',
                  '$this->HouseAddress','$this->RentorSell','$this->Contact','$this->image_id');";
         $result = $this->conn->query($query);
         if($result){
@@ -39,8 +39,8 @@ class House {
         //If House is Rent it will save in rent_houses database
         else if($this->RentorSell == "Rent"){
             $House_id = uniqid();
-            $query = "Insert into rent_houses(House_id,Facilities,Area,Price,BuildedMaterial,CeilingMaterial,WaterFacility,HouseAddress,RentorSell,Contact,image_id)
-                      values('$House_id','$this->Facilities','$this->Area','$this->Price','$this->BuildedMaterial','$this->CeilingMaterial','$this->WaterFacility',
+            $query = "Insert into rent_houses(House_id,Facilities,Area,Price,District,City,WaterFacility,HouseAddress,RentorSell,Contact,image_id)
+                      values('$House_id','$this->Facilities','$this->Area','$this->Price','$this->District','$this->City','$this->WaterFacility',
                      '$this->HouseAddress','$this->RentorSell','$this->Contact','$this->image_id');";
             $result = $this->conn->query($query);
             if($result){

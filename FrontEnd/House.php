@@ -42,6 +42,10 @@
         .bd-placeholder-img-lg {
           font-size: 3.5rem;
         }
+      .font{
+        font-size : 30px;
+        color : rgb(255, 0, 0);
+      }
       }
     </style>
 
@@ -67,11 +71,9 @@
   </div>
 </header>
 
-<main>
-
-  <div class="album py-5 bg-light">
-    <div class="container">
-      <?php
+<main class="shadow-none p-3 mb-5 bg-light rounded">
+<div class="container"><br>
+<?php
       if(!empty($_GET)){
         if($_GET['type'] == "Rent"){
           $get_houses = get_houses($_GET['type']);
@@ -82,57 +84,67 @@
       $s = sizeof($get_houses)-1;
       ?>
 
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-        <div class="col">
-          <div class="card shadow-sm">
-          <?php $x = rand(0,$s)?>
-          <div class="bd-placeholder-img card-img-top" style="height: 255px; width: 100%; background: url(<?= $get_houses["$x"]["pic2"]?>); background-position: center; background-size: contain;background-repeat: no-repeat;">
-              </div>
-
-            <div class="card-body">
-              <p class="card-text">  
-                <?php echo "Facilities : ".$get_houses["$x"]["Facilities"]."</br>"; 
-                      echo "Price : ".$get_houses["$x"]["Price"]."</br>"; 
-                      echo "House : ".$get_houses["$x"]["RentorSell"];
-                ?>
-              </p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <a href="./picture.php?House_id=<?php echo $get_houses["$x"]["House_id"]?>&RentorSell=<?php echo $get_houses["$x"]["RentorSell"]?>" type="button" class="btn btn-sm btn-outline-secondary">View</a>
-                </div>
-                <small class="text-muted">house</small>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card shadow-sm">
-            <?php $x = rand(0,$s)?>
-          <div class="bd-placeholder-img card-img-top" style="height: 255px; width: 100%; background: url(<?= $get_houses["$x"]["pic1"]?>); background-position: center; background-size: contain;background-repeat: no-repeat;">
-              </div>
-
-            <div class="card-body">
-              <p class="card-text">  
-                <?php echo "Facilities : ".$get_houses["$x"]["Facilities"]."</br>"; 
-                      echo "Price : ".$get_houses["$x"]["Price"]."</br>"; 
-                      echo "House : ".$get_houses["$x"]["RentorSell"];
-                ?>
-              </p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                <a href="./picture.php?House_id=<?php echo $get_houses["$x"]["House_id"]?>&RentorSell=<?php echo $get_houses["$x"]["RentorSell"]?>" type="button" class="btn btn-sm btn-outline-secondary">View</a>
-                </div>
-                <small class="text-muted">house</small>
-              </div>
-            </div>
-          </div>
-        </div>
+<div class="row shadow-lg p-3 mb-5 bg-body rounded">
+<?php $x = rand(0,$s)?>
+    <div class="col-sm-4">
+      <img src="<?= $get_houses["$x"]["pic1"]?>" style="height: 200px; width: 100%; background-position: center; background-repeat: no-repeat;">
+    </div>
+    <div class="col-sm-4">
+    <br><div class="container font"><b>&#x20b9;<?= $get_houses["$x"]["Price"];?> </b></div>
+    <div class="container font-monospace">Property for&nbsp;<b class="fst-italic"><?=$get_houses["$x"]["RentorSell"];?></b></div><br>
+    <p style="border-top: 1px solid red;"></p><br>
+    <div class="container font-monospace">Posted on,&nbsp;<b><?=$get_houses["$x"]["time"];?></b></div>
+  </div><br><br>
+  <div class="col-sm-2" style="margin-left:-10px;margin-top:150px">
+      <a href="./picture.php?House_id=<?=$get_houses["$x"]["House_id"]?>&RentorSell=<?=$get_houses["$x"]["RentorSell"]?>" class="btn btn-sm btn-outline-secondary">view</a>
     </div>
   </div>
+  <!-- ------------------------------------------------------------------------ -->
+  <div class="row shadow-lg p-3 mb-5 bg-body rounded">
+  <?php $x = rand(0,$s)?>
+    <div class="col-sm-4">
+      <img src="<?= $get_houses["$x"]["pic1"]?>" style="height: 200px; width: 100%; background-position: center; background-repeat: no-repeat;">
+    </div>
+    <div class="col-sm-4">
+    <br><div class="container font"><b>&#x20b9;<?= $get_houses["$x"]["Price"];?> </b></div>
+    <div class="container font-monospace">Property for&nbsp;<b class="fst-italic"><?=$get_houses["$x"]["RentorSell"];?></b></div><br>
+    <p style="border-top: 1px solid red;"></p><br>
+    <div class="container font-monospace">Posted on,&nbsp;<b><?=$get_houses["$x"]["time"];?></b></div>
+  </div><br><br>
+  <div class="col-sm-2" style="margin-left:-10px;margin-top:150px">
+      <a href="./picture.php?House_id=<?=$get_houses["$x"]["House_id"]?>&RentorSell=<?=$get_houses["$x"]["RentorSell"]?>" class="btn btn-sm btn-outline-secondary">view</a>
+    </div>
+  </div>
+<!-- --------------------------------------------------------------------------- -->
+<div class="row shadow-lg p-3 mb-5 bg-body rounded">
+<?php $x = rand(0,$s)?>
+    <div class="col-sm-4">
+      <img src="<?= $get_houses["$x"]["pic1"]?>" style="height: 200px; width: 100%; background-position: center; background-repeat: no-repeat;">
+    </div>
+    <div class="col-sm-4">
+    <br><div class="container font"><b>&#x20b9;<?= $get_houses["$x"]["Price"];?> </b></div>
+    <div class="container font-monospace">Property for&nbsp;<b class="fst-italic"><?=$get_houses["$x"]["RentorSell"];?></b></div><br>
+    <p style="border-top: 1px solid red;"></p><br>
+    <div class="container font-monospace">Posted on,&nbsp;<b><?=$get_houses["$x"]["time"];?></b></div>
+  </div><br><br>
+  <div class="col-sm-2" style="margin-left:-10px;margin-top:150px">
+      <a href="./picture.php?House_id=<?=$get_houses["$x"]["House_id"]?>&RentorSell=<?=$get_houses["$x"]["RentorSell"]?>" class="btn btn-sm btn-outline-secondary">view</a>
+    </div>
+  </div>
+  <!-- --------------------------------------------------------------------------- -->
 
+</div>   
 </main>
-    <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
+<div class="mx-auto" style="width: 200px;">
+<nav aria-label="...">
+  <ul class="pagination pagination-md">
+    <li class="page-item active"> <a class="page-link" href="#">1</a></li>
+    <li class="page-item"><a class="page-link" href="#">2</a></li>
+    <li class="page-item"><a class="page-link" href="#">3</a></li>
+  </ul>
+</nav>
+</div>
 
-      
+<script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>

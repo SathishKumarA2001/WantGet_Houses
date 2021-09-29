@@ -5,7 +5,7 @@ require_once($_SERVER['DOCUMENT_ROOT'].'/wantGet_Houses/Signin/auth.php');
 require_once($_SERVER['DOCUMENT_ROOT'].'/wantGet_Houses/func/image.php');
 
 if($_SERVER['REQUEST_METHOD'] == 'POST' /*and $_POST['submit']*/){
-    $data = array('Facilities','Area','Price','BuildedMaterial','CeilingMaterial','WaterFacility',
+    $data = array('Facilities','Area','Price','District','City','WaterFacility',
                     'HouseAddress','RentorSell','Contact');
     $value= array(); 
     $error = false;
@@ -35,7 +35,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' /*and $_POST['submit']*/){
         if($result){
             $result = update_House_id_Signup($result['House_id'],$result['RentorSell']);
             if($result){
-                header("Location: ./../FrontEnd/Register.php?msg=".urldecode(1));
+                header("Location: ./../FrontEnd/Register.php?msg=".urlencode(1));
             }
         }
     }
