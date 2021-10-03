@@ -76,42 +76,109 @@ class GetHouse {
         }
     }
 
-    public function get_rent_Filter($Filter='none',$min=0,$max=0,$type='none',$RentorSell='none'){
+    public function get_rent_Filter($RentorSell,$Filter,$Area_min,$Area_max,$Price_min,$Price_max,$Water_min,$Water_max){
+        $result = 0;
         if($RentorSell == 'Rent'){
             $RentorSell = 'rent_houses';
         }else{
             $RentorSell = 'sell_houses';
         }
-
-        if($type=='Facilities'){
-            $query = "SELECT * FROM $RentorSell LEFT JOIN images
-            ON $RentorSell.image_id = images.image_id where $RentorSell.Facilities like '$Filter%';";
+        if(isset($Filter['Facilities']) and isset($Filter['District']) and isset($Filter['City']) and isset($Filter['HouseAddress'])){                
+        $FacilityFilter = $Filter['Facilities'];
+        $DistrictFilter = $Filter['District'];
+        $CityFilter = $Filter['City'];
+        $HouseFilter = $Filter['HouseAddress'];
+        $query = "SELECT * FROM $RentorSell LEFT JOIN images
+            ON $RentorSell.image_id = images.image_id where $RentorSell.Facilities like '$FacilityFilter%'
+            and $RentorSell.Area BETWEEN $Area_min AND $Area_max and $RentorSell.Price BETWEEN $Price_min AND $Price_max
+            and $RentorSell.District = '$DistrictFilter' and $RentorSell.City = '$CityFilter'and $RentorSell.HouseAddress = '$HouseFilter'
+            and $RentorSell.WaterFacility BETWEEN $Water_min AND $Water_max;";
             $result = $this->conn->query($query);
-        }elseif($type=='Area'){
-            $query = "SELECT * FROM $RentorSell LEFT JOIN images
-            ON $RentorSell.image_id = images.image_id where $RentorSell.Area BETWEEN '$min' AND '$max';";
-            $result = $this->conn->query($query);       
-        }elseif($type=='Price'){
-            $query = "SELECT * FROM $RentorSell LEFT JOIN images
-            ON $RentorSell.image_id = images.image_id where $RentorSell.Price BETWEEN '$min' AND '$max';";
-            $result = $this->conn->query($query); 
-        }elseif($type=='District'){
-            $query = "SELECT * FROM $RentorSell LEFT JOIN images
-            ON $RentorSell.image_id = images.image_id where $RentorSell.District = '$Filter';";
-            $result = $this->conn->query($query); 
-        }elseif($type=='City'){
-            $query = "SELECT * FROM $RentorSell LEFT JOIN images
-            ON $RentorSell.image_id = images.image_id where $RentorSell.City = '$Filter';";
+        }else if (isset($Filter['Facilities']) and isset($Filter['District']) and isset($Filter['City'])){
+            $FacilityFilter = $Filter['Facilities'];
+            $DistrictFilter = $Filter['District'];
+            $CityFilter = $Filter['City'];
+        $query = "SELECT * FROM $RentorSell LEFT JOIN images
+            ON $RentorSell.image_id = images.image_id where $RentorSell.Facilities like '$FacilityFilter%'
+            and $RentorSell.Area BETWEEN $Area_min AND $Area_max and $RentorSell.Price BETWEEN $Price_min AND $Price_max
+            and $RentorSell.District = '$DistrictFilter' and $RentorSell.City = '$CityFilter'and $RentorSell.WaterFacility BETWEEN $Water_min AND $Water_max;";
             $result = $this->conn->query($query);
-        }elseif($type=='HouseAddress'){
+        }else if (isset($Filter['Facilities']) and isset($Filter['District'])){
+            $FacilityFilter = $Filter['Facilities'];
+            $DistrictFilter = $Filter['District'];
+        $query = "SELECT * FROM $RentorSell LEFT JOIN images
+            ON $RentorSell.image_id = images.image_id where $RentorSell.Facilities like '$FacilityFilter%'
+            and $RentorSell.Area BETWEEN $Area_min AND $Area_max and $RentorSell.Price BETWEEN $Price_min AND $Price_max
+            and $RentorSell.District = '$DistrictFilter' and $RentorSell.WaterFacility BETWEEN $Water_min AND $Water_max;";
+            $result = $this->conn->query($query);
+        }else if (isset($Filter['Facilities']) and isset($Filter['City'])){
+            $FacilityFilter = $Filter['Facilities'];
+            $CityFilter = $Filter['City'];
+        $query = "SELECT * FROM $RentorSell LEFT JOIN images
+            ON $RentorSell.image_id = images.image_id where $RentorSell.Facilities like '$FacilityFilter%'
+            and $RentorSell.Area BETWEEN $Area_min AND $Area_max and $RentorSell.Price BETWEEN $Price_min AND $Price_max
+            and $RentorSell.City = '$CityFilter' and $RentorSell.WaterFacility BETWEEN $Water_min AND $Water_max;";
+            $result = $this->conn->query($query);
+        }else if (isset($Filter['Facilities']) and isset($Filter['HouseAddress'])){
+            $FacilityFilter = $Filter['Facilities'];
+            $HouseFilter = $Filter['HouseAddress'];
+        $query = "SELECT * FROM $RentorSell LEFT JOIN images
+            ON $RentorSell.image_id = images.image_id where $RentorSell.Facilities like '$FacilityFilter%'
+            and $RentorSell.Area BETWEEN $Area_min AND $Area_max and $RentorSell.Price BETWEEN $Price_min AND $Price_max
+            and $RentorSell.HouseAddress = '$HouseFilter' and $RentorSell.WaterFacility BETWEEN $Water_min AND $Water_max;";
+            $result = $this->conn->query($query);
+        }else if (isset($Filter['Facilities'])){
+            $FacilityFilter = $Filter['Facilities'];
             $query = "SELECT * FROM $RentorSell LEFT JOIN images
-            ON $RentorSell.image_id = images.image_id where $RentorSell.HouseAddress = '$Filter';";
-            $result = $this->conn->query($query); 
-        }elseif($type=='WaterFacility'){
-            $query = "SELECT * FROM $RentorSell LEFT JOIN images
-            ON $RentorSell.image_id = images.image_id where $RentorSell.WaterFacility BETWEEN '$min' AND '$max';";
-            $result = $this->conn->query($query); 
-        }else{}
+            ON $RentorSell.image_id = images.image_id where $RentorSell.Facilities like '$FacilityFilter%'
+            and $RentorSell.Area BETWEEN $Area_min AND $Area_max and $RentorSell.Price BETWEEN $Price_min AND $Price_max
+            and $RentorSell.WaterFacility BETWEEN $Water_min AND $Water_max;";
+            $result = $this->conn->query($query);
+        }else if (isset($Filter['District']) and isset($Filter['City'])){
+            $DistrictFilter = $Filter['District'];
+            $CityFilter = $Filter['City'];
+        $query = "SELECT * FROM $RentorSell LEFT JOIN images ON $RentorSell.image_id = images.image_id 
+                where $RentorSell.Area BETWEEN $Area_min AND $Area_max and $RentorSell.Price BETWEEN $Price_min AND $Price_max
+                and $RentorSell.District = '$DistrictFilter' and $RentorSell.City = '$CityFilter' and $RentorSell.WaterFacility BETWEEN $Water_min AND $Water_max;";
+            $result = $this->conn->query($query);
+        }else if (isset($Filter['District']) and isset($Filter['HouseAddress'])){
+            $DistrictFilter = $Filter['District'];
+            $HouseFilter = $Filter['HouseAddress'];
+        $query = "SELECT * FROM $RentorSell LEFT JOIN images ON $RentorSell.image_id = images.image_id 
+                where $RentorSell.Area BETWEEN $Area_min AND $Area_max and $RentorSell.Price BETWEEN $Price_min AND $Price_max
+                and $RentorSell.District = '$DistrictFilter' and $RentorSell.HouseAddress = '$HouseFilter' and $RentorSell.WaterFacility BETWEEN $Water_min AND $Water_max;";
+            $result = $this->conn->query($query);
+        }else if (isset($Filter['District'])){
+            $DistrictFilter = $Filter['District'];
+        $query = "SELECT * FROM $RentorSell LEFT JOIN images ON $RentorSell.image_id = images.image_id 
+                where $RentorSell.Area BETWEEN $Area_min AND $Area_max and $RentorSell.Price BETWEEN $Price_min AND $Price_max
+                and $RentorSell.District = '$DistrictFilter' and $RentorSell.WaterFacility BETWEEN $Water_min AND $Water_max;";
+            $result = $this->conn->query($query);
+        }else if (isset($Filter['City']) and isset($Filter['HouseAddress'])){
+            $HouseFilter = $Filter['HouseAddress'];
+            $CityFilter = $Filter['City'];
+        $query = "SELECT * FROM $RentorSell LEFT JOIN images ON $RentorSell.image_id = images.image_id 
+                where $RentorSell.Area BETWEEN $Area_min AND $Area_max and $RentorSell.Price BETWEEN $Price_min AND $Price_max
+                and $RentorSell.City = '$CityFilter' and $RentorSell.HouseAddress = '$HouseFilter' and $RentorSell.WaterFacility BETWEEN $Water_min AND $Water_max;";
+            $result = $this->conn->query($query);
+        }else if (isset($Filter['City'])){
+            $CityFilter = $Filter['City'];
+        $query = "SELECT * FROM $RentorSell LEFT JOIN images ON $RentorSell.image_id = images.image_id 
+                where $RentorSell.Area BETWEEN $Area_min AND $Area_max and $RentorSell.Price BETWEEN $Price_min AND $Price_max
+                and $RentorSell.City = '$CityFilter' and $RentorSell.WaterFacility BETWEEN $Water_min AND $Water_max;";
+            $result = $this->conn->query($query);
+        }else if (isset($Filter['HouseAddress'])){
+            $HouseFilter = $Filter['HouseAddress'];
+        $query = "SELECT * FROM $RentorSell LEFT JOIN images ON $RentorSell.image_id = images.image_id 
+                where $RentorSell.Area BETWEEN $Area_min AND $Area_max and $RentorSell.Price BETWEEN $Price_min AND $Price_max
+                and $RentorSell.HouseAddress = '$HouseFilter' and $RentorSell.WaterFacility BETWEEN $Water_min AND $Water_max;";
+            $result = $this->conn->query($query);
+        }else{
+        $query = "SELECT * FROM $RentorSell LEFT JOIN images ON $RentorSell.image_id = images.image_id 
+                where $RentorSell.Area BETWEEN $Area_min AND $Area_max and $RentorSell.Price BETWEEN $Price_min AND $Price_max
+                and $RentorSell.WaterFacility BETWEEN $Water_min AND $Water_max;";
+            $result = $this->conn->query($query);
+        }
         if($result){
             $array = array();
             while($row = mysqli_fetch_assoc($result)){
