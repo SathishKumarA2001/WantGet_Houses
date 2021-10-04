@@ -48,8 +48,7 @@
         color : rgb(255, 0, 0);
       }
       }
-    </style>
-
+      </style>
 </head>
   <body>
     <?php 
@@ -134,10 +133,22 @@
 
 <main class="shadow-none p-3 mb-5 bg-light rounded">
 <br><br><br><br><br><br><br>
-<div class="container">
-  <!---------------------------------- php code ------------------------------------------------->
+<div class="mx-auto sticky-top" style="width: 200px;">
+<nav aria-label="...">
+  <ul class="pagination pagination-md">
+    <?php $p = rand(1,$s)?>
+    <li class="page-item"><input class="page-link" href="./House.php?type=<?=$_GET['type']?>" type="button" value="Back 2" onclick="goBackTwoPages()"></li>
+    <li class="page-item"><input class="page-link" href="./House.php?type=<?=$_GET['type']?>" type="button" value="Back" onclick="goBack()"></li>
+    <li class="page-item"><input class="page-link" href="./House.php?type=<?=$_GET['type']?>" type="button" value="Forward" onclick="goForward()"></li>
+    <li class="page-item"><a class="page-link" href="./House.php?type=<?=$_GET['type']?>&page=<?=$p?>">next</a></li>
+  </ul>
+</nav>
+</div>
+<div class="container" id="myScroll">
+<!---------------------------------- php code ------------------------------------------------->
+  <?php for($i=0; $i < 5; $i++) { ?>  <!-- Loop the div --> 
+    <?php $x = rand(0,$s)?> <!-- Rand number generator for new contents -->
 <div class="row shadow-lg p-3 mb-5 bg-body rounded">
-<?php $x = rand(0,$s)?>
     <div class="col-sm-4">  
     <img src="<?= $get_houses["$x"]["pic1"]?>" style="height: 200px; width: 100%; background-position: center; background-repeat: no-repeat;">
     </div>
@@ -150,53 +161,14 @@
   <div class="col-sm-2" style="margin-left:-10px;margin-top:150px">
       <a href="./picture.php?House_id=<?=$get_houses["$x"]["House_id"]?>&RentorSell=<?=$get_houses["$x"]["RentorSell"]?>" class="btn btn-sm btn-outline-secondary">view</a>
     </div>
-  </div>
-  <!-- ------------------------------------------------------------------------ -->
-  <div class="row shadow-lg p-3 mb-5 bg-body rounded">
-  <?php $x = rand(0,$s)?>
-    <div class="col-sm-4">
-      <img src="<?= $get_houses["$x"]["pic1"]?>" style="height: 200px; width: 100%; background-position: center; background-repeat: no-repeat;">
     </div>
-    <div class="col-sm-4">
-    <br><div class="container font"><b>&#x20b9;<?= $get_houses["$x"]["Price"];?> </b></div>
-    <div class="container font-monospace">Property for&nbsp;<b class="fst-italic"><?=$get_houses["$x"]["RentorSell"];?></b></div><br>
-    <p style="border-top: 1px solid red;"></p><br>
-    <div class="container font-monospace">Posted on,&nbsp;<b><?=$get_houses["$x"]["time"];?></b></div>
-  </div><br><br>
-  <div class="col-sm-2" style="margin-left:-10px;margin-top:150px">
-      <a href="./picture.php?House_id=<?=$get_houses["$x"]["House_id"]?>&RentorSell=<?=$get_houses["$x"]["RentorSell"]?>" class="btn btn-sm btn-outline-secondary">view</a>
-    </div>
-  </div>
-<!-- --------------------------------------------------------------------------- -->
-<div class="row shadow-lg p-3 mb-5 bg-body rounded">
-<?php $x = rand(0,$s)?>
-    <div class="col-sm-4">
-      <img src="<?= $get_houses["$x"]["pic1"]?>" style="height: 200px; width: 100%; background-position: center; background-repeat: no-repeat;">
-    </div>
-    <div class="col-sm-4">
-    <br><div class="container font"><b>&#x20b9;<?= $get_houses["$x"]["Price"];?> </b></div>
-    <div class="container font-monospace">Property for&nbsp;<b class="fst-italic"><?=$get_houses["$x"]["RentorSell"];?></b></div><br>
-    <p style="border-top: 1px solid red;"></p><br>
-    <div class="container font-monospace">Posted on,&nbsp;<b><?=$get_houses["$x"]["time"];?></b></div>
-  </div><br><br>
-  <div class="col-sm-2" style="margin-left:-10px;margin-top:150px">
-      <a href="./picture.php?House_id=<?=$get_houses["$x"]["House_id"]?>&RentorSell=<?=$get_houses["$x"]["RentorSell"]?>" class="btn btn-sm btn-outline-secondary">view</a>
-    </div>
-  </div>
-  <!-- --------------------------------------------------------------------------- -->
+<?php } ?>
+
 </div>   
 </main>
-<div class="mx-auto" style="width: 200px;">
-<nav aria-label="...">
-  <ul class="pagination pagination-md">
-    <li class="page-item active"> <a class="page-link" href="#">1</a></li>
-    <li class="page-item"><a class="page-link" href="#">2</a></li>
-    <li class="page-item"><a class="page-link" href="#">3</a></li>
-  </ul>
-</nav>
-</div>
 
 <script>
+  //Model
 var exampleModal = document.getElementById('exampleModal')
 exampleModal.addEventListener('show.bs.modal', function (event) {
   var button = event.relatedTarget
@@ -207,11 +179,20 @@ exampleModal.addEventListener('show.bs.modal', function (event) {
   modalTitle.textContent = 'New message to ' + recipient
   modalBodyInput.value = recipient
 })
+
+//pagination
+function goForward() {
+  window.history.forward()
+}
+
+function goBack() {
+  window.history.back()
+}
+
+function goBackTwoPages() {
+  window.history.go(-2);
+}
 </script> 
-<script>
-
-  </script>
-
 
 <script src="./assets/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script><script src="./dashboard/dashboard.js"></script>
