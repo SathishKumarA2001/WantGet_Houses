@@ -2,7 +2,7 @@
 require_once($_SERVER['DOCUMENT_ROOT'].'/wantGet_Houses/Signin/auth.php');
   if(isset($_COOKIE['username']) and isset($_COOKIE['token'])){
     if(!verify_session($_COOKIE['username'],$_COOKIE['token'])){
-      header("Location: ../Signin/Signin.php");
+      header("Location: ./../Signin/Signin.php");
     }
   }
 ?>
