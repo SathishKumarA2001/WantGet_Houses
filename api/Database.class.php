@@ -3,10 +3,10 @@
 class Database {
 
     public function __construct(){
-        $servername = 'localhost';
-        $username = 'che';
-        $password = 'che';
-        $db_name = 'wantget_houses';
+        $servername = 'mysql.selfmade.ninja';
+        $username = 'house';
+        $password = 'wantgethouses';
+        $db_name = 'house_wantgethouses';
         // Create connection
         $conn = new mysqli($servername, $username, $password,$db_name);
         $this->conn = $conn;
@@ -15,7 +15,6 @@ class Database {
             http_response_code(500);
             die("Connection failed: " . $this->conn->connect_error);
         }else{
-            //print("connection success");
             return $this->conn;
         }
     }

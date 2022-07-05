@@ -18,6 +18,7 @@ require_once($_SERVER['DOCUMENT_ROOT'].'/wantGet_Houses/api/Database.class.php')
                     header("Location: ./Signin.php?msg=err");
                 }
             }elseif($_POST["type"] == 'signin') {
+                
                 $query = "SELECT * from signup where username='$username' and password='$password';";
                 $result = $conn->query($query);
                 $result = $result->fetch_all();

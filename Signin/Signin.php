@@ -50,14 +50,24 @@
 <?php
     if (isset($_GET['msg'])) {
     ?>
-    <div class="alert alert-danger" role="alert">
     	<?php
       if($_GET['msg'] == 'err'){
+      ?>
+      <div class="alert alert-danger" role="alert">
+      <?php
         echo "Invalid Input";
+      }
+      ?>
+    </div>
+    <?php
+      if($_GET['msg'] == 'success'){
+    ?>
+    <div class="alert alert-success" role="alert">
+      <?php
+        echo "Signin please";
       }
       }
     	?>
-    </div>
 
 <form action="./auth.php" method="POST">
   <svg width="42" height="42" fill="currentColor" class="bi bi-house-door-fill" viewBox="0 0 16 16">
@@ -82,7 +92,7 @@
     <input type="hidden" name="type" value="signin" />
     <input class="w-100 btn btn-lg btn-primary" name="submit" type="submit">
   </form><br>
-  <a class="w-100 btn btn-lg btn-secondary" href="signup.php">Sign Up</a>
+  <a class="w-100 btn btn-lg btn-secondary" href="./SignUp.php">Sign Up</a>
 </main>
     
   </body>

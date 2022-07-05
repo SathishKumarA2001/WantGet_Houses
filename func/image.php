@@ -2,6 +2,7 @@
 require_once($_SERVER['DOCUMENT_ROOT'].'/wantGet_Houses/api/Database.class.php');
 
 function upload(){
+    $flag = 1;
     $file_dir = "../Images/";
     $pic = array(); 
     if(empty($_FILES["pic"]["name"]["0"])){
@@ -16,14 +17,16 @@ function upload(){
 
         $uploadOK = 1;
         $conn = new Database();  //Database Connection
-    
-        if(move_uploaded_file($_FILES["House_pic"]["tmp_name"]["$x"], $file)) {
+
+        if(move_uploaded_file($_FILES["House_pic"]["tmp_name"]["$x"],$file)) {
             array_push($pic,$file);
         }else{
+            $flag = 0;
             echo "Sorry, there was an error uploading your file.";
         }
     }
-    $image_id = rand(1111,9999);
+    if($flag == 1){
+        $image_id = rand(1111,9999);
         $query = "insert into images(image_id,pic1,pic2) values('$image_id','$pic[0]','$pic[1]');";
         $result = $conn->query($query);
         if($result){
@@ -31,6 +34,7 @@ function upload(){
         }else{
             return "Error in uploading Pictures : ".$conn->conn_error();
         }
+    }
 }
 /*    if(!isset($_POST["submit"])){
             $check = getimagesize($_FILES["House_pic"]["tmp_name"]);
